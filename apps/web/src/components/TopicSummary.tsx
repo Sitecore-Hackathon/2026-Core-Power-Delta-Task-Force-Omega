@@ -31,7 +31,6 @@ const TopicSummary: React.FC<TopicSummaryProps> = ({ node, onClose }) => {
                 // minWidth: 400,
                 height: "100%",
                 maxHeight: "calc(100vh - 60px)",
-                overflowY: "auto",
                 boxSizing: "border-box",
                 background: "#fff",
                 borderRadius: 20,
@@ -61,7 +60,14 @@ const TopicSummary: React.FC<TopicSummaryProps> = ({ node, onClose }) => {
             >
                 ×
             </button>
-            <div style={{ width: "100%", overflow: "hidden" }}>
+            <div
+                style={{
+                    width: "100%",
+                    overflowY: "auto",
+                    overflowX: "hidden",
+                    maxHeight: "calc(100vh - 120px)",
+                }}
+            >
                 <h1 style={{ fontSize: 28, marginBottom: 12 }}>{node.name}</h1>
                 <div style={{ marginBottom: 18 }}>
                     <p style={{ fontSize: 16, lineHeight: 1.6 }}>
