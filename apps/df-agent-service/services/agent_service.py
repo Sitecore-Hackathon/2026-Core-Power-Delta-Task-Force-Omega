@@ -32,6 +32,15 @@ Generate 5-10 questions per quiz. Questions should test practical developer know
 not just rote memorization. Include a mix of conceptual and scenario-based questions.
 Return ONLY the JSON, no other text."""
 
+CHAT_SYSTEM_PROMPT = """You are a helpful Sitecore certification study assistant.
+You help developers prepare for Sitecore certification exams by answering questions,
+explaining concepts, and providing guidance on Sitecore topics.
+
+Use the search_competencies tool to find relevant competency information when needed.
+Use the fetch_url_content tool to retrieve documentation content when a user asks about specific topics.
+
+Be concise, accurate, and encouraging. If you're unsure about something, say so."""
+
 
 def create_quiz_agent(chroma_repo: ChromaRepository):
     @tool
@@ -57,10 +66,37 @@ def create_quiz_agent(chroma_repo: ChromaRepository):
     return create_react_agent(llm, tools, prompt=QUIZ_SYSTEM_PROMPT)
 
 
+def create_chat_agent(chroma_repo: ChromaRepository):
+    @tool
+    def search_competencies(query: str) -> str:
+        """Search the competency database for a specific Sitecore competency topic.
+        Returns matching competency records including descriptions, weights, and URLs."""
+        results = chroma_repo.search(query)
+        return json.dumps(results, indent=2)
+
+    @tool
+    def fetch_url_content(url: str) -> str:
+        """Fetch the text content from a documentation URL.
+        Use this to read official docs and community resources."""
+        try:
+            response = requests.get(url, timeout=15)
+            response.raise_for_status()
+            return response.text[:10000]
+        except requests.RequestException as e:
+            return f"Error fetching {url}: {e}"
+
+    tools = [search_competencies, fetch_url_content]
+    llm = ChatOpenAI(model="gpt-4o", temperature=0.7, streaming=True)
+    return create_react_agent(llm, tools, prompt=CHAT_SYSTEM_PROMPT)
+
+
 class AgentService:
     def __init__(self, chroma_repo: ChromaRepository):
         self._repo = chroma_repo
         self._agent = create_quiz_agent(chroma_repo)
+
+    def create_chat_agent(self):
+        return create_chat_agent(self._repo)
 
     def generate_quiz(self, competency_topic: str) -> dict:
         result = self._agent.invoke({
