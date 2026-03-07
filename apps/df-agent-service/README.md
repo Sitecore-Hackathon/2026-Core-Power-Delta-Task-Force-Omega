@@ -87,7 +87,7 @@ GET /
 
 ## Implementation Notes
 
-- The chat agent uses `gpt-4o` with `temperature=0.7` and streaming enabled; the quiz agent uses `gpt-4o` with `temperature=0` for deterministic output
+- The chat agent uses `gpt-4.1` with `temperature=0.7` and streaming enabled; the quiz agent uses `gpt-4o` with `temperature=0` for deterministic output
 - Both agents are built with LangGraph's `create_react_agent` and share two tools: `search_competencies` (ChromaDB lookup) and `fetch_url_content` (fetches documentation URLs)
 - Competency data is sourced from `https://df-serializer-service.onrender.com/competencies` and only indexed once (skipped if the collection already has data)
 - CORS is configured for the Render-hosted frontend and `localhost` development origins
