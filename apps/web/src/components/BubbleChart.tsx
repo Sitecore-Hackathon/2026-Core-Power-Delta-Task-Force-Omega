@@ -15,15 +15,15 @@ export interface BubbleDataPoint {
 
 interface BubbleChartProps {
     onNodeClick?: (node: BubbleDataPoint) => void;
+    product?: string; // Optional product filter
 }
-
-const API_URL = "https://df-serializer-service.onrender.com/competencies";
 
 const getName = (d: BubbleDataPoint): string => d.name || d.id;
 const getGroup = (d: BubbleDataPoint): string => d.id || d.name;
 const getNames = (d: BubbleDataPoint): string[] => getName(d).split(/\s+/g);
 
-const BubbleChart: React.FC<BubbleChartProps> = ({ onNodeClick }) => {
+const BubbleChart: React.FC<BubbleChartProps> = ({ onNodeClick, product }) => {
+    const API_URL = `https://df-serializer-service.onrender.com/competencies${product ? `?product=${product}` : ""}`;
     const svgRef = useRef<SVGSVGElement | null>(null);
     const containerRef = useRef<HTMLDivElement | null>(null);
     const [data, setData] = useState<BubbleDataPoint[]>([]);
@@ -137,14 +137,17 @@ const BubbleChart: React.FC<BubbleChartProps> = ({ onNodeClick }) => {
             .append("g")
             .attr("transform", `translate(${offsetX},${offsetY})`);
 
-        const zoom = d3.zoom<SVGSVGElement, unknown>()
+        const zoom = d3
+            .zoom<SVGSVGElement, unknown>()
             .scaleExtent([0.5, 5])
             .on("zoom", (event) => {
                 g.attr("transform", event.transform.toString());
             });
 
-        svg.call(zoom)
-            .call(zoom.transform, d3.zoomIdentity.translate(offsetX, offsetY));
+        svg.call(zoom).call(
+            zoom.transform,
+            d3.zoomIdentity.translate(offsetX, offsetY),
+        );
 
         const node = g
             .selectAll("g")
@@ -211,7 +214,16 @@ const BubbleChart: React.FC<BubbleChartProps> = ({ onNodeClick }) => {
     if (loading) return <div>Loading chart...</div>;
     if (error) return <div style={{ color: "red" }}>Error: {error}</div>;
     return (
-        <div ref={containerRef} style={{ width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
+        <div
+            ref={containerRef}
+            style={{
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+            }}
+        >
             <svg ref={svgRef} />
         </div>
     );

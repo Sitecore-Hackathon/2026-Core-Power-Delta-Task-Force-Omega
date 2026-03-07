@@ -8,7 +8,8 @@ import TopicSummary from "./components/TopicSummary";
 type View = "chart" | "chat";
 
 const PRODUCTS = [
-    { id: "sitecore-ai", label: "Sitecore AI" },
+    { id: "sitecoreai", label: "Sitecore AI" },
+    { id: "contenthub", label: "Sitecore ContentHub" },
 ];
 
 function App() {
@@ -77,22 +78,6 @@ function App() {
                             </option>
                         ))}
                     </select>
-                    <div
-                        style={{
-                            width: 34,
-                            height: 34,
-                            borderRadius: "50%",
-                            backgroundColor: "#e8e8e8",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            fontSize: 14,
-                            fontWeight: 600,
-                            color: "#555",
-                        }}
-                    >
-                        S
-                    </div>
                 </div>
             </header>
 
@@ -149,7 +134,10 @@ function App() {
                         display: "block",
                     }}
                 >
-                    <BubbleChart onNodeClick={setSelectedNode} />
+                    <BubbleChart
+                        onNodeClick={setSelectedNode}
+                        product={product}
+                    />
                 </div>
                 <Chatbot
                     open={view === "chat"}
