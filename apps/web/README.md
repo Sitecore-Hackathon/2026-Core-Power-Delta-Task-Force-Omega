@@ -1,73 +1,48 @@
-# React + TypeScript + Vite
+# Core Power Knowledge Explorer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive visualization and learning platform for exploring Sitecore product competencies. Users can explore competency areas through an animated bubble chart, access learning resources, take quizzes, and chat with an AI assistant.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Bubble Chart** — D3-powered interactive visualization of competencies, sized by weight and color-coded by product (ex: Sitecore AI / ContentHub). Supports hover, zoom, and click-to-select.
+- **Topic Summary** — Side panel showing selected competency details, official documentation links, and community resources.
+- **Quiz** — Multi-question knowledge checks with immediate feedback and explanations, fetched per competency.
+- **AI Chatbot** — Streaming chat interface with markdown rendering, powered by a backend agent service.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+- **React 19** + **TypeScript**
+- **Vite** — Dev server and build toolchain
+- **D3** — Data visualization
+- **React Markdown** — Chat response rendering
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Scripts
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+| Script            | Description                        |
+| ----------------- | ---------------------------------- |
+| `npm run dev`     | Start Vite dev server (hot reload) |
+| `npm run build`   | TypeScript compile + Vite build    |
+| `npm run lint`    | Run ESLint                         |
+| `npm run preview` | Preview production build locally   |
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Project Structure
+
+```
+src/
+├── App.tsx              # Main layout — header, bubble chart, panels, nav
+├── main.tsx             # React entry point
+├── components/
+│   ├── BubbleChart.tsx  # D3 bubble visualization
+│   ├── Chatbot.tsx      # AI chat panel with streaming
+│   ├── Quiz.tsx         # Quiz data fetching and state
+│   ├── QuizQuestions.tsx # Quiz UI with navigation and feedback
+│   └── TopicSummary.tsx # Competency detail side panel
+└── assets/
 ```
