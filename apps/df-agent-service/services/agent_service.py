@@ -101,9 +101,10 @@ class AgentService:
     def __init__(self, chroma_repo: ChromaRepository):
         self._repo = chroma_repo
         self._agent = create_quiz_agent(chroma_repo)
+        self._chat_agent = create_chat_agent(chroma_repo)
 
-    def create_chat_agent(self):
-        return create_chat_agent(self._repo)
+    def get_chat_agent(self):
+        return self._chat_agent
 
     def generate_quiz(self, competency_topic: str) -> dict:
         result = self._agent.invoke({

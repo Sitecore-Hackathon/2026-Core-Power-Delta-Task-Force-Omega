@@ -15,7 +15,7 @@ class ChatRequest(BaseModel):
 
 @chat_router.post("/stream")
 async def chat_stream(request: ChatRequest, agent_service: AgentService = Depends(get_agent_service)):
-    chat_agent = agent_service.create_chat_agent()
+    chat_agent = agent_service.get_chat_agent()
 
     async def generate():
         async for event in chat_agent.astream_events(
