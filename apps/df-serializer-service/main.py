@@ -35,6 +35,7 @@ origins = [
     "https://two026-core-power-delta-task-force-omega.onrender.com",
     "http://two026-core-power-delta-task-force-omega.onrender.com",
     "http://localhost:5173",  # For local development
+    "http://localhost:4173/", # For local development (production preview)
     "http://localhost:3000" # optional: if you ever run Next.js locally
 ]
 
