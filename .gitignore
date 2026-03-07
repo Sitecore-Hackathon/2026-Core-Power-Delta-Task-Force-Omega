@@ -50,42 +50,12 @@ _ReSharper*/
 .vs/
 #Nuget packages folder
 packages/
-##################### Turborepo Starter
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# Dependencies
-node_modules
-.pnp
-.pnp.js
+# IDE
+.idea/
 
-# Local env files
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# Python
+__pycache__/
 
-# Testing
-coverage
-
-# Turbo
-.turbo
-
-# Vercel
-.vercel
-
-# Build Outputs
-.next/
-out/
-build
-dist
-
-
-# Debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Misc
+# OS
 .DS_Store
-*.pem
