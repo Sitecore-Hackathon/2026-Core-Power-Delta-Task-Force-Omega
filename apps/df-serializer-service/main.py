@@ -24,7 +24,9 @@ def load_data() -> list:
 # Define allowed origins (replace with your frontend Render URL)
 origins = [
     "https://two026-core-power-delta-task-force-omega.onrender.com",
-    "http://localhost:5173/",  # For local development
+    "http://two026-core-power-delta-task-force-omega.onrender.com",
+    "http://localhost:5173",  # For local development
+    "http://localhost:3000" # optional: if you ever run Next.js locally
 ]
 
 # Add the CORSMiddleware
