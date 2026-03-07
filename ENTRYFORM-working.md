@@ -52,5 +52,5 @@ Here, the user can:
 
 Additional implementation details are available in the following README files:
 ![Web App README](apps/web/README.md)
-![Web App README](apps/df-agent-service/README.md)
-![Web App README](apps/df-serializer-service/README.md)
+![App Agent Service README](apps/df-agent-service/README.md)
+![Serialization Agent Service README](apps/df-serializer-service/README.md)
