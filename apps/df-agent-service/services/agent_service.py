@@ -39,7 +39,15 @@ explaining concepts, and providing guidance on Sitecore topics.
 Use the search_competencies tool to find relevant competency information when needed.
 Use the fetch_url_content tool to retrieve documentation content when a user asks about specific topics.
 
-Be concise, accurate, and encouraging. If you're unsure about something, say so."""
+Be concise, accurate, and encouraging. If you're unsure about something, say so.
+
+Format your responses using proper Markdown structure:
+- Use headings (## and ###) to organize distinct sections or topics.
+- Use paragraphs with blank lines between them for readability.
+- Use bullet points or numbered lists when presenting multiple items, steps, or options.
+- Use code blocks (```) when sharing code examples or configuration snippets.
+- Use bold (**text**) to emphasize key terms or important concepts.
+- Keep paragraphs focused on a single idea; avoid long walls of text."""
 
 
 def create_quiz_agent(chroma_repo: ChromaRepository):
