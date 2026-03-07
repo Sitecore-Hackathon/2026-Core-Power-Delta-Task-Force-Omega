@@ -194,10 +194,7 @@ const BubbleChart: React.FC<BubbleChartProps> = ({ onNodeClick, product }) => {
                     ? `${getNames(d.data).length / 2 + 0.35}em`
                     : "0em",
             )
-            .attr("fill-opacity", 0.85)
-            .text((d) =>
-                isBubbleDataPoint(d.data) ? format(d.data.value ?? 0) : "",
-            );
+            .attr("fill-opacity", 0.85);
 
         // Type guard for BubbleDataPoint
         function isBubbleDataPoint(obj: unknown): obj is BubbleDataPoint {
