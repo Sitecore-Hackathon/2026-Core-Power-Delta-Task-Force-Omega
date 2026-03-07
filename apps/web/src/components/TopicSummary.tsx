@@ -15,11 +15,10 @@ const TopicSummary: React.FC<TopicSummaryProps> = ({ node, onClose }) => {
         }
     }, []);
 
-    // Placeholder summary and docs for demonstration
-    const summary = `Summary for ${node.id}`;
+    // Use node.urls for documentation links, fallback to empty arrays if missing
     const documentationLinks = {
-        official_docs: [],
-        community_resources: [],
+        official_docs: node.urls?.official_docs ?? [],
+        community_resources: node.urls?.community_resources ?? [],
     };
 
     return (
@@ -42,9 +41,9 @@ const TopicSummary: React.FC<TopicSummaryProps> = ({ node, onClose }) => {
                 ×
             </button>
             <div>
-                <h1>{node.id}</h1>
+                <h1>{node.name}</h1>
                 <div>
-                    <p>{summary}</p>
+                    <p>{node.description}</p>
                 </div>
                 <div>
                     <h2>Official Documentation</h2>
