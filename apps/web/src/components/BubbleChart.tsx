@@ -1,4 +1,4 @@
-﻿import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import * as d3 from "d3";
 
 export interface BubbleDataPoint {
@@ -25,9 +25,11 @@ const getNames = (d: BubbleDataPoint): string[] => getName(d).split(/\s+/g);
 
 const BubbleChart: React.FC<BubbleChartProps> = ({ onNodeClick }) => {
     const svgRef = useRef<SVGSVGElement | null>(null);
+    const containerRef = useRef<HTMLDivElement | null>(null);
     const [data, setData] = useState<BubbleDataPoint[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [dimensions, setDimensions] = useState({ width: 928, height: 600 });
 
     useEffect(() => {
         fetch(API_URL)
@@ -66,29 +68,41 @@ const BubbleChart: React.FC<BubbleChartProps> = ({ onNodeClick }) => {
     }, []);
 
     useEffect(() => {
+        if (!containerRef.current) return;
+        const observer = new ResizeObserver((entries) => {
+            const { width, height } = entries[0].contentRect;
+            if (width > 0 && height > 0) {
+                setDimensions({ width, height });
+            }
+        });
+        observer.observe(containerRef.current);
+        return () => observer.disconnect();
+    }, []);
+
+    useEffect(() => {
         if (!svgRef.current || data.length === 0) return;
 
-        const width = 928;
-        const height = 500;
+        const { width, height } = dimensions;
         const margin = 1;
+        const size = Math.max(width, height) * 0.85;
         const format = d3.format(",d");
         const color = d3.scaleOrdinal([
-            "#6E3FFF",
-            "#4408fa",
-            "#674cb9",
-            "#401bb0",
-            "#6E3FFF",
-            "#7d7d7d",
-            "#cbcbcc",
-            "#8200e3",
-            "#893331    ",
-            "#888",
-            "#888",
+            "#eb1f1f",
+            "#d41616",
+            "#c41230",
+            "#a8102a",
+            "#f04e4e",
+            "#b91c1c",
+            "#991b1b",
+            "#e53935",
+            "#c62828",
+            "#ef5350",
+            "#d32f2f",
         ]);
 
         const pack = d3
             .pack<{ children: BubbleDataPoint[] }>()
-            .size([width - margin * 2, height - margin * 2])
+            .size([size, size])
             .padding(3);
 
         const root = pack(
@@ -108,23 +122,38 @@ const BubbleChart: React.FC<BubbleChartProps> = ({ onNodeClick }) => {
         const svg = d3.select(svgRef.current);
         svg.selectAll("*").remove();
 
+        const offsetX = (width - size) / 2;
+        const offsetY = (height - size) / 2;
+
         svg.attr("width", width)
             .attr("height", height)
-            .attr("viewBox", `${-margin} ${-margin} ${width} ${height}`)
+            .attr("viewBox", `0 0 ${width} ${height}`)
             .attr(
                 "style",
-                "max-width: 100%; height: auto; font: 10px sans-serif;",
+                "max-width: 100%; height: 100%; font: 14px sans-serif; cursor: grab;",
             )
             .attr("text-anchor", "middle");
 
-        const node = svg
+        const g = svg
             .append("g")
+            .attr("transform", `translate(${offsetX},${offsetY})`);
+
+        const zoom = d3.zoom<SVGSVGElement, unknown>()
+            .scaleExtent([0.5, 5])
+            .on("zoom", (event) => {
+                g.attr("transform", event.transform.toString());
+            });
+
+        svg.call(zoom)
+            .call(zoom.transform, d3.zoomIdentity.translate(offsetX, offsetY));
+
+        const node = g
             .selectAll("g")
             .data(root.leaves())
             .join("g")
             .attr("transform", (d) => `translate(${d.x},${d.y})`)
             .style("cursor", "pointer")
-            .on("click", (event, d) => {
+            .on("click", (_event, d) => {
                 if (onNodeClick && isBubbleDataPoint(d.data)) {
                     onNodeClick(d.data);
                 }
@@ -145,7 +174,9 @@ const BubbleChart: React.FC<BubbleChartProps> = ({ onNodeClick }) => {
 
         const text = node
             .append("text")
-            .attr("clip-path", (d) => `circle(${d.r})`);
+            .attr("clip-path", (d) => `circle(${d.r})`)
+            .attr("fill", "#fff")
+            .attr("font-weight", 600);
 
         text.selectAll("tspan")
             .data((d) => (isBubbleDataPoint(d.data) ? getNames(d.data) : []))
@@ -161,7 +192,7 @@ const BubbleChart: React.FC<BubbleChartProps> = ({ onNodeClick }) => {
                     ? `${getNames(d.data).length / 2 + 0.35}em`
                     : "0em",
             )
-            .attr("fill-opacity", 0.7)
+            .attr("fill-opacity", 0.85)
             .text((d) =>
                 isBubbleDataPoint(d.data) ? format(d.data.value ?? 0) : "",
             );
@@ -176,11 +207,15 @@ const BubbleChart: React.FC<BubbleChartProps> = ({ onNodeClick }) => {
                 "value" in obj
             );
         }
-    }, [data, onNodeClick]);
+    }, [data, onNodeClick, dimensions]);
 
     if (loading) return <div>Loading chart...</div>;
     if (error) return <div style={{ color: "red" }}>Error: {error}</div>;
-    return <svg ref={svgRef} />;
+    return (
+        <div ref={containerRef} style={{ width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <svg ref={svgRef} />
+        </div>
+    );
 };
 
 export default BubbleChart;

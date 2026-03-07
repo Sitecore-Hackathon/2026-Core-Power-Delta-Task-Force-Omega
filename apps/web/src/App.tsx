@@ -7,8 +7,13 @@ import TopicSummary from "./components/TopicSummary";
 
 type View = "chart" | "chat";
 
+const PRODUCTS = [
+    { id: "sitecore-ai", label: "Sitecore AI" },
+];
+
 function App() {
     const [view, setView] = useState<View>("chart");
+    const [product, setProduct] = useState(PRODUCTS[0].id);
     const [selectedNode, setSelectedNode] = useState<BubbleDataPoint | null>(
         null,
     );
@@ -40,79 +45,54 @@ function App() {
                         marginLeft: 20,
                     }}
                 >
-                    <div
+                    <span
                         style={{
-                            width: 32,
-                            height: 32,
-                            borderRadius: "50%",
-                            border: "2px solid #222",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
+                            fontSize: 18,
+                            fontWeight: 700,
+                            color: "#222",
                         }}
                     >
-                        <div
-                            style={{
-                                width: 12,
-                                height: 12,
-                                borderRadius: "50%",
-                                backgroundColor: "#222",
-                            }}
-                        />
-                    </div>
-                    <div
-                        style={{
-                            width: 28,
-                            height: 28,
-                            borderRadius: "50%",
-                            backgroundColor: "#222",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                        }}
-                    >
-                        <svg
-                            width="14"
-                            height="14"
-                            viewBox="0 0 14 14"
-                            fill="none"
-                        >
-                            <path d="M7 1L13 13H1L7 1Z" fill="white" />
-                        </svg>
-                    </div>
+                        Core Power
+                    </span>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                     <select
-                        value={view}
-                        onChange={(e) => setView(e.target.value as View)}
+                        value={product}
+                        onChange={(e) => setProduct(e.target.value)}
                         style={{
-                            fontSize: 16,
+                            fontSize: 14,
                             fontWeight: 600,
-                            border: "none",
+                            border: "1px solid #ddd",
+                            borderRadius: 8,
                             background: "transparent",
                             color: "#222",
                             cursor: "pointer",
-                            padding: "4px 8px",
+                            padding: "6px 10px",
                             appearance: "auto",
                         }}
                     >
-                        <option value="chart">Chart View</option>
-                        <option value="chat">Chatbot</option>
+                        {PRODUCTS.map((p) => (
+                            <option key={p.id} value={p.id}>
+                                {p.label}
+                            </option>
+                        ))}
                     </select>
-                </div>
-                <div
-                    style={{
-                        width: 34,
-                        height: 34,
-                        borderRadius: "50%",
-                        backgroundColor: "#e8e8e8",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontSize: 14,
-                        fontWeight: 600,
-                        color: "#555",
-                    }}
-                >
-                    S
+                    <div
+                        style={{
+                            width: 34,
+                            height: 34,
+                            borderRadius: "50%",
+                            backgroundColor: "#e8e8e8",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            fontSize: 14,
+                            fontWeight: 600,
+                            color: "#555",
+                        }}
+                    >
+                        S
+                    </div>
                 </div>
             </header>
 
@@ -159,31 +139,36 @@ function App() {
                 <div
                     style={{
                         flex: selectedNode ? 0.6 : 1,
-                        maxWidth: selectedNode ? 600 : 900,
                         minWidth: 0,
+                        minHeight: 0,
                         transition: "all 0.5s cubic-bezier(.77,0,.18,1)",
                         transform: selectedNode
                             ? "translateX(120px)"
                             : "translateX(0)",
                         zIndex: 1,
-                        display: view === "chart" ? "block" : "none",
+                        display: "block",
                     }}
                 >
                     <BubbleChart onNodeClick={setSelectedNode} />
                 </div>
-                {view === "chat" && (
-                    <div style={{ width: "100%", height: "100%" }}>
-                        <Chatbot />
-                    </div>
-                )}
+                <Chatbot
+                    open={view === "chat"}
+                    onClose={() => setView("chart")}
+                />
             </main>
 
             {/* Bottom Nav Bar */}
             <nav
                 style={{
+                    position: "fixed",
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
                     display: "flex",
                     justifyContent: "center",
                     padding: "16px 0 24px",
+                    zIndex: 200,
+                    pointerEvents: "none",
                 }}
             >
                 <div
@@ -194,6 +179,7 @@ function App() {
                         backgroundColor: "#1a1a1a",
                         borderRadius: 40,
                         padding: "10px 20px",
+                        pointerEvents: "auto",
                     }}
                 >
                     <NavButton
