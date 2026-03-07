@@ -1,13 +1,5 @@
 # Hackathon Submission Entry form
 
-> __Important__  
-> 
-> Copy and paste the content of this file into README.md or face automatic __disqualification__  
-> All headlines and subheadlines shall be retained if not noted otherwise.  
-> Fill in text in each section as instructed and then delete the existing text, including this blockquote.
-
-You can find a very good reference to Github flavoured markdown reference in [this cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet). If you want something a bit more WYSIWYG for editing then could use [StackEdit](https://stackedit.io/app) which provides a more user friendly interface for generating the Markdown code. Those of you who are [VS Code fans](https://code.visualstudio.com/docs/languages/markdown#_markdown-preview) can edit/preview directly in that interface too.
-
 ## Team name
 Core Power Delta Task Force Omega
 
@@ -24,36 +16,15 @@ Drawing from Sitecore resources, this interactive tool visualizes core platform 
 
 This experience is powered by a serializatoin service which provides the app access to Sitecore documentation data and vectorizes it for AI Agents that generate quizzes and chat responses.
 
-_You can alternately paste a [link here](#docs) to a document within this repo containing the description._
-
 ## Video link
 ⟹ Provide a video highlighing your Hackathon module submission and provide a link to the video. You can use any video hosting, file share or even upload the video to this repository. _Just remember to update the link below_
 
 ⟹ [Replace this Video link](#video-link)
 
-## Pre-requisites and Dependencies
-
-Dependencies include:
-- Processed Sitecore documentation and forum/support data. This service was mocked with AI driven data for the purposes this demo
-- Hosted AI Agent services
-
-⟹ Does your module rely on other Sitecore modules or frameworks?
-
-- List any dependencies
-- Or other modules that must be installed
-- Or services that must be enabled/configured
-
-_Remove this subsection if your entry does not have any prerequisites other than Sitecore_
-
 ## Installation instructions
 
 Visit ![https://two026-core-power-delta-task-force-omega.onrender.com](https://two026-core-power-delta-task-force-omega.onrender.com) to enjoy the experience.
 This a standalone app accessible in a browser. There are no additional installation instructions. 
-
-### Configuration
-There is no custom configuration at this time.
-
-_Remove this subsection if your entry does not require any configuration that is not fully covered in the installation instructions already_
 
 ## Usage instructions
 The app homepage is a diagram of core competencies for the default Sitecore product, Sitecore AI. The user sees these sized base on their relative prevalance/emphasis across documentation and community data (forums, blogs, etc). 
@@ -78,4 +49,8 @@ Here, the user can:
 
 
 ## Comments
-If you'd like to make additional comments that is important for your module entry.
+
+Additional implementation details are available in the following README files:
+![Web App README](apps/web/README.md)
+![Web App README](apps/df-agent-service/README.md)
+![Web App README](apps/df-serializer-service/README.md)
