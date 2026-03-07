@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4339b2d8-d7d6-4dd2-a6ee-0fbcd4cec7a0" name="Changes" comment="Added quiz agent">
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+    <list default="true" id="4339b2d8-d7d6-4dd2-a6ee-0fbcd4cec7a0" name="Changes" comment="updated dockerfile">
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/agent_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/agent_service.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +63,7 @@
     "ai.playground.ignore.import.keys.banner.in.settings": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "chat-agent",
     "junie.onboarding.icon.badge.shown": "true",
     "last_opened_file_path": "/Users/hutch_ii/Projects/2026-Core-Power-Delta-Task-Force-Omega/apps/df-agent-service",
     "node.js.detected.package.eslint": "true",
@@ -125,7 +126,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772882424515</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="updated dockerfile">
+      <option name="closed" value="true" />
+      <created>1772883752160</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1772883752160</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -137,6 +146,7 @@
     <MESSAGE value="Added github workflow for agent service" />
     <MESSAGE value="Added local chroma db with endpoint for vector search" />
     <MESSAGE value="Added quiz agent" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added quiz agent" />
+    <MESSAGE value="updated dockerfile" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated dockerfile" />
   </component>
 </project>

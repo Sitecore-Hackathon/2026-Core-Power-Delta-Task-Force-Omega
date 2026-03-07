@@ -5,6 +5,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from dependencies import chroma_repository
 from routers.index_router import index_router
+from routers.chat_router import chat_router
 
 SEED_URL = "https://df-serializer-service.onrender.com/competencies"
 
@@ -16,6 +17,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 app.include_router(index_router)
+app.include_router(chat_router)
 
 
 @app.get("/")

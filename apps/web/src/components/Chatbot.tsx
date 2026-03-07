@@ -1,18 +1,9 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 
 interface Message {
     role: "user" | "bot";
     text: string;
 }
-
-const BOT_RESPONSES = [
-    "That's an interesting point! Tell me more.",
-    "I see what you mean. Have you considered another approach?",
-    "Great question! Let me think about that...",
-    "Thanks for sharing! Here's what I think...",
-    "That makes sense. Anything else on your mind?",
-    "Fascinating! I hadn't thought of it that way.",
-];
 
 interface ChatbotProps {
     open: boolean;
@@ -24,27 +15,90 @@ const Chatbot: React.FC<ChatbotProps> = ({ open, onClose }) => {
         { role: "bot", text: "Hi! I'm a chatbot. How can I help you today?" },
     ]);
     const [input, setInput] = useState("");
+    const [isStreaming, setIsStreaming] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
+    const abortRef = useRef<AbortController | null>(null);
 
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
 
-    const handleSend = () => {
+    const handleSend = useCallback(async () => {
         const trimmed = input.trim();
-        if (!trimmed) return;
+        if (!trimmed || isStreaming) return;
 
         const userMsg: Message = { role: "user", text: trimmed };
-        const botMsg: Message = {
-            role: "bot",
-            text: BOT_RESPONSES[
-                Math.floor(Math.random() * BOT_RESPONSES.length)
-            ],
-        };
-
-        setMessages((prev) => [...prev, userMsg, botMsg]);
+        setMessages((prev) => [...prev, userMsg]);
         setInput("");
-    };
+        setIsStreaming(true);
+
+        // Add an empty bot message that we'll stream into
+        const botIndex = messages.length + 1; // after user msg is appended
+        setMessages((prev) => [...prev, { role: "bot", text: "" }]);
+
+        const controller = new AbortController();
+        abortRef.current = controller;
+
+        let accumulated = "";
+
+        try {
+            const response = await fetch("https://df-agent-service.onrender.com/api/v1/chat/stream", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: trimmed }),
+                signal: controller.signal,
+            });
+
+            if (!response.ok || !response.body) {
+                setMessages((prev) => {
+                    const updated = [...prev];
+                    updated[botIndex] = { role: "bot", text: "Sorry, something went wrong." };
+                    return updated;
+                });
+                setIsStreaming(false);
+                return;
+            }
+
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder();
+
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+
+                const chunk = decoder.decode(value, { stream: true });
+                const lines = chunk.split("\n");
+
+                for (const line of lines) {
+                    if (line.startsWith("data: ")) {
+                        const data = line.slice(6);
+                        if (data === "[DONE]") break;
+                        accumulated += data;
+                        const text = accumulated;
+                        setMessages((prev) => {
+                            const updated = [...prev];
+                            updated[botIndex] = { role: "bot", text };
+                            return updated;
+                        });
+                    }
+                }
+            }
+        } catch (err) {
+            if ((err as Error).name !== "AbortError") {
+                setMessages((prev) => {
+                    const updated = [...prev];
+                    updated[botIndex] = {
+                        role: "bot",
+                        text: accumulated || "Sorry, something went wrong.",
+                    };
+                    return updated;
+                });
+            }
+        } finally {
+            abortRef.current = null;
+            setIsStreaming(false);
+        }
+    }, [input, isStreaming, messages.length]);
 
     return (
         <div
@@ -179,7 +233,8 @@ const Chatbot: React.FC<ChatbotProps> = ({ open, onClose }) => {
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             onKeyDown={(e) => e.key === "Enter" && handleSend()}
-                            placeholder="Type a message..."
+                            disabled={isStreaming}
+                            placeholder={isStreaming ? "Waiting for response..." : "Type a message..."}
                             style={{
                                 flex: 1,
                                 padding: "10px 12px",
@@ -193,18 +248,20 @@ const Chatbot: React.FC<ChatbotProps> = ({ open, onClose }) => {
                         />
                         <button
                             onClick={handleSend}
+                            disabled={isStreaming}
                             style={{
                                 padding: "8px 16px",
                                 borderRadius: 8,
                                 border: "none",
-                                background: "#6E3FFF",
+                                background: isStreaming ? "#4a2db3" : "#6E3FFF",
                                 color: "#fff",
-                                cursor: "pointer",
+                                cursor: isStreaming ? "not-allowed" : "pointer",
                                 fontSize: 14,
                                 fontWeight: 500,
+                                opacity: isStreaming ? 0.6 : 1,
                             }}
                         >
-                            Send
+                            {isStreaming ? "..." : "Send"}
                         </button>
                     </div>
                 </div>
