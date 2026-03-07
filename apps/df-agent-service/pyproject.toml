@@ -9,6 +9,7 @@ dependencies = [
     "fastapi[standard]>=0.135.0",
     "langchain>=1.2.10",
     "langchain-openai>=1.1.10",
+    "langsmith>=0.7.14",
     "python-dotenv>=1.2.2",
     "requests>=2.32.5",
 ]
