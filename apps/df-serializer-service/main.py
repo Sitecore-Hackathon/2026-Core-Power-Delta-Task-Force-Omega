@@ -12,13 +12,22 @@ app = FastAPI(
     version="1.0.0"
 )
 
-BASE_DIR = Path(__file__).resolve().parent
-DATA_FILE = BASE_DIR / "sitecoreai-flat-schema.json"
 
-def load_data() -> list:
-    if not os.path.exists(DATA_FILE):
-        raise HTTPException(status_code=500, detail=f"Data file not found: {DATA_FILE}")
-    with open(DATA_FILE, "r") as f:
+BASE_DIR = Path(__file__).resolve().parent
+
+def get_data_file(product: str) -> Path:
+    if product == "sitecoreai":
+        return BASE_DIR / "sitecoreai-flat-schema.json"
+    elif product == "contenthub":
+        return BASE_DIR / "contenthub-flat-schema.json"
+    else:
+        raise HTTPException(status_code=400, detail=f"Invalid product: {product}")
+
+def load_data(product: str) -> list:
+    data_file = get_data_file(product)
+    if not os.path.exists(data_file):
+        raise HTTPException(status_code=500, detail=f"Data file not found: {data_file}")
+    with open(data_file, "r") as f:
         return json.load(f)
     
 # Define allowed origins (replace with your frontend Render URL)
@@ -38,13 +47,18 @@ app.add_middleware(
     allow_headers=["*"],    # Allows all headers
 )
 
+
+from fastapi import Query
+
 @app.get(
     "/competencies",
     summary="Get all competencies",
     description="Returns the full array of competency objects."
 )
-def get_all_competencies():
-    return {"total": len(load_data()), "competencies": load_data()}
+def get_all_competencies(product: str = Query("sitecoreai", description="Product to use: 'sitecoreai' or 'contenthub'")):
+    data = load_data(product)
+    return {"total": len(data), "competencies": data}
+
 
 
 @app.get(
@@ -52,9 +66,10 @@ def get_all_competencies():
     summary="Get total number of competencies",
     description="Returns the total number of competency objects in the dataset."
 )
-def get_competency_count():
-    data = load_data()
+def get_competency_count(product: str = Query("sitecoreai", description="Product to use: 'sitecoreai' or 'contenthub'")):
+    data = load_data(product)
     return {"total": len(data)}
+
 
 
 @app.get(
@@ -63,9 +78,10 @@ def get_competency_count():
     description="Returns all competency objects where weight_pct is greater than the provided threshold."
 )
 def get_competencies_weight_gt(
-    threshold: float = Query(..., description="Return competencies with weight_pct greater than this value", example=10)
+    threshold: float = Query(..., description="Return competencies with weight_pct greater than this value", example=10),
+    product: str = Query("sitecoreai", description="Product to use: 'sitecoreai' or 'contenthub'")
 ):
-    data = load_data()
+    data = load_data(product)
     results = [c for c in data if c["weight_pct"] > threshold]
     if not results:
         raise HTTPException(
@@ -75,15 +91,17 @@ def get_competencies_weight_gt(
     return {"total": len(results), "competencies": results}
 
 
+
 @app.get(
     "/competencies/weight/less-than",
     summary="Get competencies with weight less than a value",
     description="Returns all competency objects where weight_pct is less than the provided threshold."
 )
 def get_competencies_weight_lt(
-    threshold: float = Query(..., description="Return competencies with weight_pct less than this value", example=10)
+    threshold: float = Query(..., description="Return competencies with weight_pct less than this value", example=10),
+    product: str = Query("sitecoreai", description="Product to use: 'sitecoreai' or 'contenthub'")
 ):
-    data = load_data()
+    data = load_data(product)
     results = [c for c in data if c["weight_pct"] < threshold]
     if not results:
         raise HTTPException(

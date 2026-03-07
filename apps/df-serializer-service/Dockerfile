@@ -9,6 +9,7 @@ RUN uv sync --no-dev --no-install-project
 
 COPY main.py .
 COPY sitecoreai-flat-schema.json .
+COPY contenthub-flat-schema.json .
 
 EXPOSE 8000
 
