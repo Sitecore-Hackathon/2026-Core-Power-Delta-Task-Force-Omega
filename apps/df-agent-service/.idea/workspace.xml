@@ -5,14 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4339b2d8-d7d6-4dd2-a6ee-0fbcd4cec7a0" name="Changes" comment="Added github workflow for agent service">
-      <change afterPath="$PROJECT_DIR$/models/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/compentency.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/repositories/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/repositories/chroma.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routers/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routers/index_router.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dependencies.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/agent_service.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repositories/chroma.py" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/chroma.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routers/index_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/routers/index_router.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +68,7 @@
     "ai.playground.ignore.import.keys.banner.in.settings": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "add-chroma",
+    "git-widget-placeholder": "quiz-agent",
     "junie.onboarding.icon.badge.shown": "true",
     "last_opened_file_path": "/Users/hutch_ii/Projects/2026-Core-Power-Delta-Task-Force-Omega/apps/df-agent-service",
     "node.js.detected.package.eslint": "true",
@@ -134,6 +133,7 @@
     <MESSAGE value="Init agent project" />
     <MESSAGE value="Added docker file" />
     <MESSAGE value="Added github workflow for agent service" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added github workflow for agent service" />
+    <MESSAGE value="Added local chroma db with endpoint for vector search" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added local chroma db with endpoint for vector search" />
   </component>
 </project>
