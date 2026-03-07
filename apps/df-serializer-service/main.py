@@ -4,7 +4,6 @@ import json
 import os
 import json
 from pathlib import Path
-# from sample_data.data import competencies
 
 app = FastAPI(
     title="CompetencySerializer API",
@@ -20,9 +19,6 @@ def load_data() -> list:
         raise HTTPException(status_code=500, detail=f"Data file not found: {DATA_FILE}")
     with open(DATA_FILE, "r") as f:
         return json.load(f)
-
-# def load_data():
-#     return competencies
 
 @app.get(
     "/competencies",
