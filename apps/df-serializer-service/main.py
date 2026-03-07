@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 import json
 import os
 import json
@@ -19,6 +20,21 @@ def load_data() -> list:
         raise HTTPException(status_code=500, detail=f"Data file not found: {DATA_FILE}")
     with open(DATA_FILE, "r") as f:
         return json.load(f)
+    
+# Define allowed origins (replace with your frontend Render URL)
+origins = [
+    "https://two026-core-power-delta-task-force-omega.onrender.com",
+    "http://localhost:5173/",  # For local development
+]
+
+# Add the CORSMiddleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  # Allows specified origins
+    allow_credentials=True, # Allows cookies/auth headers
+    allow_methods=["*"],    # Allows all HTTP methods (GET, POST, etc.)
+    allow_headers=["*"],    # Allows all headers
+)
 
 @app.get(
     "/competencies",
