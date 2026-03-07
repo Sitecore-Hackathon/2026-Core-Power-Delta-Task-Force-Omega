@@ -2,6 +2,8 @@ from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import JSONResponse
 import json
 import os
+import json
+from pathlib import Path
 
 app = FastAPI(
     title="CompetencySerializer API",
@@ -9,8 +11,8 @@ app = FastAPI(
     version="1.0.0"
 )
 
-DATA_FILE = "./competencies-flat-schema.json"
-
+BASE_DIR = Path(__file__).resolve().parent
+DATA_FILE = BASE_DIR / "competencies-flat-schema.json"
 
 def load_data() -> list:
     if not os.path.exists(DATA_FILE):
