@@ -1,11 +1,8 @@
-import json
-
 import chromadb
 import requests
 from pydantic import TypeAdapter
 from models.compentency import Compentency
 
-chroma_client = chromadb.Client()
 
 class ChromaRepository:
     def __init__(self):
