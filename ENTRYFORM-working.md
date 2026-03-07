@@ -56,21 +56,26 @@ There is no custom configuration at this time.
 _Remove this subsection if your entry does not require any configuration that is not fully covered in the installation instructions already_
 
 ## Usage instructions
+The app homepage is a diagram of core competencies for the default Sitecore product, Sitecore AI. The user sees these sized base on their relative prevalance/emphasis across documentation and community data (forums, blogs, etc). 
+![Homepage](images/1%20-%20app%20homepage.png)
 
+Here, the user can:
+- select a different product to explore using a dropdown as shown here
+![Product Selection](images/2%20-%20product%20selection.png)
 
-⟹ Provide documentation about your module, how do the users use your module, where are things located, what do the icons mean, are there any secret shortcuts etc.
+- select a topic by clicking it
+![Select topic](images/2%20-%20product%20selection.png)
 
-Include screenshots where necessary. You can add images to the `./images` folder and then link to them from your documentation:
+- viewing topic summary/related resources and optionally start testing knowledge with a quiz upon selection
+![Select topic](images/4%20-%20selecting%20topic%20to%20view%20details.png)
 
-![Hackathon Logo](docs/images/hackathon.png?raw=true "Hackathon Logo")
+- take Agent generated quiz to test platform knowledge and recieve feedback on answers
+![Take q](images/5%20-%20accessing%20quiz.png)
+![Quiz feedback](images/6%20-%20quiz%20feedback.png)
 
-You can embed images of different formats too:
+- interact with Agent via chat for conversational platform support
+![Agent chat](images/7%20-%20accessing%20chat%20experience.png)
 
-![Deal With It](docs/images/deal-with-it.gif?raw=true "Deal With It")
-
-And you can embed external images too:
-
-![Random](https://thiscatdoesnotexist.com/)
 
 ## Comments
 If you'd like to make additional comments that is important for your module entry.
