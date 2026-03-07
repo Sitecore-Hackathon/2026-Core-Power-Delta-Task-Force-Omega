@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4339b2d8-d7d6-4dd2-a6ee-0fbcd4cec7a0" name="Changes" comment="Updated method on quiz endpoint">
+    <list default="true" id="4339b2d8-d7d6-4dd2-a6ee-0fbcd4cec7a0" name="Changes" comment="update agent instruction">
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -62,7 +62,7 @@
     "ai.playground.ignore.import.keys.banner.in.settings": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "LangSmith",
+    "git-widget-placeholder": "main",
     "junie.onboarding.icon.badge.shown": "true",
     "last_opened_file_path": "/Users/hutch_ii/Projects/2026-Core-Power-Delta-Task-Force-Omega/apps/df-agent-service",
     "node.js.detected.package.eslint": "true",
@@ -151,7 +151,23 @@
       <option name="project" value="LOCAL" />
       <updated>1772902637235</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Updated agent service model to 4.1">
+      <option name="closed" value="true" />
+      <created>1772922668827</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1772922668827</updated>
+    </task>
+    <task id="LOCAL-00009" summary="update agent instruction">
+      <option name="closed" value="true" />
+      <created>1772924145467</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1772924145467</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -166,6 +182,8 @@
     <MESSAGE value="updated dockerfile" />
     <MESSAGE value="added streaming agent and endpoint" />
     <MESSAGE value="Updated method on quiz endpoint" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated method on quiz endpoint" />
+    <MESSAGE value="Updated agent service model to 4.1" />
+    <MESSAGE value="update agent instruction" />
+    <option name="LAST_COMMIT_MESSAGE" value="update agent instruction" />
   </component>
 </project>

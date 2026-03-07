@@ -37,14 +37,10 @@ function App() {
                 }}
             >
                 <div style={{ display: "flex", alignItems: "center", gap: 10, marginLeft: 12 }}>
-                    <div
-                        style={{
-                            width: 8,
-                            height: 8,
-                            borderRadius: "50%",
-                            background: "var(--accent)",
-                            boxShadow: "0 0 8px rgba(79,70,229,0.4)",
-                        }}
+                    <img
+                        src="/images.png"
+                        alt="Sitecore"
+                        style={{ width: 42, height: 42, objectFit: "contain" }}
                     />
                     <span style={{ fontSize: 17, fontWeight: 700, color: "var(--text-primary)", letterSpacing: "-0.3px" }}>
                         Core Power
