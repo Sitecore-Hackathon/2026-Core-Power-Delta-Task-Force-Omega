@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
+import ReactMarkdown from "react-markdown";
 
 interface Message {
     role: "user" | "bot";
@@ -10,14 +11,35 @@ interface ChatbotProps {
     onClose?: () => void;
 }
 
+const initialMessages: Message[] = [
+    { role: "bot", text: "Hi! I'm a chatbot. How can I help you today?" },
+];
+
+const promptSuggestions = [
+    "What is Sitecore XM Cloud?",
+    "How does Sitecore personalization work?",
+    "Explain Sitecore headless architecture",
+    "What are Sitecore composable DXP components?",
+    "Help me prepare for my cetification exam",
+    "Help me build a feature"
+];
+
 const Chatbot: React.FC<ChatbotProps> = ({ open, onClose }) => {
-    const [messages, setMessages] = useState<Message[]>([
-        { role: "bot", text: "Hi! I'm a chatbot. How can I help you today?" },
-    ]);
+    const [messages, setMessages] = useState<Message[]>(initialMessages);
     const [input, setInput] = useState("");
     const [isStreaming, setIsStreaming] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const abortRef = useRef<AbortController | null>(null);
+    const showSuggestions = messages.length === 1 && messages[0].role === "bot";
+
+    const handleClear = useCallback(() => {
+        if (isStreaming && abortRef.current) {
+            abortRef.current.abort();
+        }
+        setMessages(initialMessages);
+        setInput("");
+        setIsStreaming(false);
+    }, [isStreaming]);
 
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -107,7 +129,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ open, onClose }) => {
                 bottom: 80,
                 left: "50%",
                 width: "100%",
-                maxWidth: 480,
+                maxWidth: 700,
                 zIndex: 100,
                 padding: "0 16px",
                 transform: open
@@ -163,7 +185,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ open, onClose }) => {
                             flexShrink: 0,
                         }}
                     />
-                    <div>
+                    <div style={{ flex: 1 }}>
                         <div style={{ color: "#fff", fontWeight: 600, fontSize: 15 }}>
                             Chat Assistant
                         </div>
@@ -171,13 +193,29 @@ const Chatbot: React.FC<ChatbotProps> = ({ open, onClose }) => {
                             Online
                         </div>
                     </div>
+                    {messages.length > 1 && (
+                        <button
+                            onClick={handleClear}
+                            style={{
+                                background: "none",
+                                border: "1px solid #444",
+                                color: "#aaa",
+                                fontSize: 12,
+                                cursor: "pointer",
+                                padding: "4px 10px",
+                                borderRadius: 8,
+                            }}
+                        >
+                            Clear
+                        </button>
+                    )}
                 </div>
 
                 {/* Messages */}
                 <div
                     style={{
                         padding: "0 20px",
-                        height: 300,
+                        height: 500,
                         overflowY: "auto",
                     }}
                 >
@@ -205,10 +243,71 @@ const Chatbot: React.FC<ChatbotProps> = ({ open, onClose }) => {
                                     fontSize: 14,
                                 }}
                             >
-                                {msg.text}
+                                {msg.role === "bot" ? (
+                                    <ReactMarkdown
+                                        components={{
+                                            p: ({ children }) => <p style={{ margin: "0.4em 0" }}>{children}</p>,
+                                            ul: ({ children }) => <ul style={{ margin: "0.4em 0", paddingLeft: 20 }}>{children}</ul>,
+                                            ol: ({ children }) => <ol style={{ margin: "0.4em 0", paddingLeft: 20 }}>{children}</ol>,
+                                            code: ({ children, className }) => {
+                                                const isBlock = className?.startsWith("language-");
+                                                return isBlock ? (
+                                                    <pre style={{ background: "#1a1a1e", padding: 8, borderRadius: 6, overflowX: "auto", margin: "0.4em 0" }}>
+                                                        <code>{children}</code>
+                                                    </pre>
+                                                ) : (
+                                                    <code style={{ background: "#1a1a1e", padding: "1px 4px", borderRadius: 4 }}>{children}</code>
+                                                );
+                                            },
+                                        }}
+                                    >
+                                        {msg.text}
+                                    </ReactMarkdown>
+                                ) : (
+                                    msg.text
+                                )}
                             </div>
                         </div>
                     ))}
+                    {showSuggestions && (
+                        <div
+                            style={{
+                                display: "flex",
+                                flexWrap: "wrap",
+                                gap: 8,
+                                marginTop: 12,
+                            }}
+                        >
+                            {promptSuggestions.map((suggestion) => (
+                                <button
+                                    key={suggestion}
+                                    onClick={() => {
+                                        setInput(suggestion);
+                                    }}
+                                    style={{
+                                        background: "transparent",
+                                        border: "1px solid #444",
+                                        color: "#ccc",
+                                        fontSize: 13,
+                                        padding: "6px 14px",
+                                        borderRadius: 20,
+                                        cursor: "pointer",
+                                        transition: "border-color 0.2s, color 0.2s",
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        e.currentTarget.style.borderColor = "#6E3FFF";
+                                        e.currentTarget.style.color = "#fff";
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.borderColor = "#444";
+                                        e.currentTarget.style.color = "#ccc";
+                                    }}
+                                >
+                                    {suggestion}
+                                </button>
+                            ))}
+                        </div>
+                    )}
                     <div ref={messagesEndRef} />
                 </div>
 
@@ -228,13 +327,22 @@ const Chatbot: React.FC<ChatbotProps> = ({ open, onClose }) => {
                             padding: 4,
                         }}
                     >
-                        <input
-                            type="text"
+                        <textarea
                             value={input}
-                            onChange={(e) => setInput(e.target.value)}
-                            onKeyDown={(e) => e.key === "Enter" && handleSend()}
+                            onChange={(e) => {
+                                setInput(e.target.value);
+                                e.target.style.height = "auto";
+                                e.target.style.height = Math.min(e.target.scrollHeight, 120) + "px";
+                            }}
+                            onKeyDown={(e) => {
+                                if (e.key === "Enter" && !e.shiftKey) {
+                                    e.preventDefault();
+                                    handleSend();
+                                }
+                            }}
                             disabled={isStreaming}
                             placeholder={isStreaming ? "Waiting for response..." : "Type a message..."}
+                            rows={1}
                             style={{
                                 flex: 1,
                                 padding: "10px 12px",
@@ -244,6 +352,10 @@ const Chatbot: React.FC<ChatbotProps> = ({ open, onClose }) => {
                                 color: "#fff",
                                 fontSize: 14,
                                 outline: "none",
+                                resize: "none",
+                                lineHeight: 1.4,
+                                maxHeight: 120,
+                                overflowY: "auto",
                             }}
                         />
                         <button
@@ -252,6 +364,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ open, onClose }) => {
                             style={{
                                 padding: "8px 16px",
                                 borderRadius: 8,
+                                alignSelf: "flex-end",
                                 border: "none",
                                 background: isStreaming ? "#4a2db3" : "#6E3FFF",
                                 color: "#fff",
