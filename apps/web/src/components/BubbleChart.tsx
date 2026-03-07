@@ -24,6 +24,7 @@ const getNames = (d: BubbleDataPoint): string[] => getName(d).split(/\s+/g);
 
 const BubbleChart: React.FC<BubbleChartProps> = ({ onNodeClick, product }) => {
     const API_URL = `https://df-serializer-service.onrender.com/competencies${product ? `?product=${product}` : ""}`;
+
     const svgRef = useRef<SVGSVGElement | null>(null);
     const containerRef = useRef<HTMLDivElement | null>(null);
     const [data, setData] = useState<BubbleDataPoint[]>([]);
@@ -32,12 +33,15 @@ const BubbleChart: React.FC<BubbleChartProps> = ({ onNodeClick, product }) => {
     const [dimensions, setDimensions] = useState({ width: 928, height: 600 });
 
     useEffect(() => {
+        let isMounted = true;
+        queueMicrotask(() => setLoading(true));
         fetch(API_URL)
             .then((res) => {
                 if (!res.ok) throw new Error("Failed to fetch data");
                 return res.json();
             })
             .then((json) => {
+                if (!isMounted) return;
                 if (json && Array.isArray(json.competencies)) {
                     setData(
                         json.competencies.map((c: Record<string, unknown>) => ({
@@ -62,10 +66,14 @@ const BubbleChart: React.FC<BubbleChartProps> = ({ onNodeClick, product }) => {
                 setLoading(false);
             })
             .catch((e) => {
+                if (!isMounted) return;
                 setError(e.message);
                 setLoading(false);
             });
-    }, []);
+        return () => {
+            isMounted = false;
+        };
+    }, [API_URL, product]);
 
     useEffect(() => {
         if (!containerRef.current) return;
@@ -227,7 +235,7 @@ const BubbleChart: React.FC<BubbleChartProps> = ({ onNodeClick, product }) => {
                 "value" in obj
             );
         }
-    }, [data, onNodeClick, dimensions]);
+    }, [data, onNodeClick, dimensions, product]);
 
     if (loading) return <div>Loading chart...</div>;
     if (error) return <div style={{ color: "red" }}>Error: {error}</div>;
