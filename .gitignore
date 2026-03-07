@@ -50,3 +50,12 @@ _ReSharper*/
 .vs/
 #Nuget packages folder
 packages/
+
+# IDE
+.idea/
+
+# Python
+__pycache__/
+
+# OS
+.DS_Store
