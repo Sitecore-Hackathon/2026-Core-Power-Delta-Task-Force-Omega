@@ -18,6 +18,7 @@ export type QuizProps = {
     onClose?: () => void;
 };
 const API_URL = "https://df-agent-service.onrender.com/api/v1/indexer/quiz/";
+// TODO fail gracefully & retry on failure
 export const Quiz = (props: QuizProps) => {
     const [questionData, setQuestionData] = useState<QuizData | null>(null);
     const [loading, setLoading] = useState(true);
