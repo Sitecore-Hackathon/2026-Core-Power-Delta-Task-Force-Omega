@@ -5,6 +5,7 @@ from contextlib import asynccontextmanager
 from dependencies import chroma_repository
 from routers.index_router import index_router
 from routers.chat_router import chat_router
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
