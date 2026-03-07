@@ -1,5 +1,6 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import type { BubbleDataPoint } from "./BubbleChart";
+import { Quiz } from "./Quiz";
 
 interface TopicSummaryProps {
     node: BubbleDataPoint;
@@ -8,6 +9,7 @@ interface TopicSummaryProps {
 
 const TopicSummary: React.FC<TopicSummaryProps> = ({ node, onClose }) => {
     const summaryRef = useRef<HTMLDivElement>(null);
+    const [showQuiz, setShowQuiz] = useState(false);
 
     useEffect(() => {
         if (summaryRef.current) {
@@ -69,68 +71,97 @@ const TopicSummary: React.FC<TopicSummaryProps> = ({ node, onClose }) => {
                 }}
             >
                 <h1 style={{ fontSize: 28, marginBottom: 12 }}>{node.name}</h1>
-                <div style={{ marginBottom: 18 }}>
-                    <p style={{ fontSize: 16, lineHeight: 1.6 }}>
-                        {node.description}
-                    </p>
-                </div>
-                <div style={{ marginBottom: 18 }}>
-                    <h2 style={{ fontSize: 20, marginBottom: 8 }}>
-                        Official Documentation
-                    </h2>
-                    <ul style={{ paddingLeft: 18, wordBreak: "break-all" }}>
-                        {documentationLinks.official_docs.length === 0 && (
-                            <li>No links</li>
-                        )}
-                        {documentationLinks.official_docs.map((link, idx) => (
-                            <li key={idx} style={{ marginBottom: 6 }}>
-                                <a
-                                    href={link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    {link}
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-                <div style={{ marginBottom: 18 }}>
-                    <h2 style={{ fontSize: 20, marginBottom: 8 }}>
-                        Community Resources
-                    </h2>
-                    <ul style={{ paddingLeft: 18, wordBreak: "break-all" }}>
-                        {documentationLinks.community_resources.length ===
-                            0 && <li>No links</li>}
-                        {documentationLinks.community_resources.map(
-                            (link, idx) => (
-                                <li key={idx} style={{ marginBottom: 6 }}>
-                                    <a
-                                        href={link}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        {link}
-                                    </a>
-                                </li>
-                            ),
-                        )}
-                    </ul>
-                </div>
-                <button
-                    type="button"
-                    style={{
-                        marginTop: 12,
-                        padding: "10px 20px",
-                        fontSize: 16,
-                        borderRadius: 8,
-                        border: "none",
-                        fontWeight: 600,
-                        cursor: "pointer",
-                    }}
-                >
-                    Test Your Knowledge
-                </button>
+                {showQuiz ? (
+                    <div>
+                        <Quiz
+                            competency_id={node.id}
+                            onClose={() => setShowQuiz(false)}
+                        />
+                    </div>
+                ) : (
+                    <>
+                        <div style={{ marginBottom: 18 }}>
+                            <p style={{ fontSize: 16, lineHeight: 1.6 }}>
+                                {node.description}
+                            </p>
+                        </div>
+                        <div style={{ marginBottom: 18 }}>
+                            <h2 style={{ fontSize: 20, marginBottom: 8 }}>
+                                Official Documentation
+                            </h2>
+                            <ul
+                                style={{
+                                    paddingLeft: 18,
+                                    wordBreak: "break-all",
+                                }}
+                            >
+                                {documentationLinks.official_docs.length ===
+                                    0 && <li>No links</li>}
+                                {documentationLinks.official_docs.map(
+                                    (link, idx) => (
+                                        <li
+                                            key={idx}
+                                            style={{ marginBottom: 6 }}
+                                        >
+                                            <a
+                                                href={link}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                {link}
+                                            </a>
+                                        </li>
+                                    ),
+                                )}
+                            </ul>
+                        </div>
+                        <div style={{ marginBottom: 18 }}>
+                            <h2 style={{ fontSize: 20, marginBottom: 8 }}>
+                                Community Resources
+                            </h2>
+                            <ul
+                                style={{
+                                    paddingLeft: 18,
+                                    wordBreak: "break-all",
+                                }}
+                            >
+                                {documentationLinks.community_resources
+                                    .length === 0 && <li>No links</li>}
+                                {documentationLinks.community_resources.map(
+                                    (link, idx) => (
+                                        <li
+                                            key={idx}
+                                            style={{ marginBottom: 6 }}
+                                        >
+                                            <a
+                                                href={link}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                {link}
+                                            </a>
+                                        </li>
+                                    ),
+                                )}
+                            </ul>
+                        </div>
+                        <button
+                            type="button"
+                            style={{
+                                marginTop: 12,
+                                padding: "10px 20px",
+                                fontSize: 16,
+                                borderRadius: 8,
+                                border: "none",
+                                fontWeight: 600,
+                                cursor: "pointer",
+                            }}
+                            onClick={() => setShowQuiz(true)}
+                        >
+                            Test Your Knowledge
+                        </button>
+                    </>
+                )}
             </div>
         </div>
     );
