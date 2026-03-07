@@ -4,7 +4,7 @@ import json
 import os
 import json
 from pathlib import Path
-from data import competencies
+from sample_data.data import competencies
 
 app = FastAPI(
     title="CompetencySerializer API",
