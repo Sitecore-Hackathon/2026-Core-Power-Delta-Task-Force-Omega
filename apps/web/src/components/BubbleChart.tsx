@@ -15,15 +15,15 @@ export interface BubbleDataPoint {
 
 interface BubbleChartProps {
     onNodeClick?: (node: BubbleDataPoint) => void;
+    product?: string; // Optional product filter
 }
-
-const API_URL = "https://df-serializer-service.onrender.com/competencies";
 
 const getName = (d: BubbleDataPoint): string => d.name || d.id;
 const getGroup = (d: BubbleDataPoint): string => d.id || d.name;
 const getNames = (d: BubbleDataPoint): string[] => getName(d).split(/\s+/g);
 
-const BubbleChart: React.FC<BubbleChartProps> = ({ onNodeClick }) => {
+const BubbleChart: React.FC<BubbleChartProps> = ({ onNodeClick, product }) => {
+    const API_URL = `https://df-serializer-service.onrender.com/competencies${product ? `?product=${product}` : ""}`;
     const svgRef = useRef<SVGSVGElement | null>(null);
     const containerRef = useRef<HTMLDivElement | null>(null);
     const [data, setData] = useState<BubbleDataPoint[]>([]);
@@ -85,19 +85,40 @@ const BubbleChart: React.FC<BubbleChartProps> = ({ onNodeClick }) => {
         const { width, height } = dimensions;
         const size = Math.max(width, height) * 0.85;
         const format = d3.format(",d");
-        const color = d3.scaleOrdinal([
-            "#eb1f1f",
-            "#d41616",
-            "#c41230",
-            "#a8102a",
-            "#f04e4e",
-            "#b91c1c",
-            "#991b1b",
-            "#e53935",
-            "#c62828",
-            "#ef5350",
-            "#d32f2f",
-        ]);
+        // Color palettes for different products
+        const colorPalettes: Record<string, string[]> = {
+            sitecoreai: [
+                "#eb1f1f",
+                "#d41616",
+                "#c41230",
+                "#a8102a",
+                "#f04e4e",
+                "#b91c1c",
+                "#991b1b",
+                "#e53935",
+                "#c62828",
+                "#ef5350",
+                "#d32f2f",
+            ],
+            contenthub: [
+                "#1f77eb",
+                "#166ad4",
+                "#125cc4",
+                "#104aa8",
+                "#4e8ff0",
+                "#1c5cb9",
+                "#1b4999",
+                "#397be5",
+                "#286ac6",
+                "#5093ef",
+                "#2f6fd3",
+            ],
+        };
+        const palette =
+            product && colorPalettes[product]
+                ? colorPalettes[product]
+                : colorPalettes.sitecoreai;
+        const color = d3.scaleOrdinal(palette);
 
         const pack = d3
             .pack<{ children: BubbleDataPoint[] }>()
@@ -137,14 +158,17 @@ const BubbleChart: React.FC<BubbleChartProps> = ({ onNodeClick }) => {
             .append("g")
             .attr("transform", `translate(${offsetX},${offsetY})`);
 
-        const zoom = d3.zoom<SVGSVGElement, unknown>()
+        const zoom = d3
+            .zoom<SVGSVGElement, unknown>()
             .scaleExtent([0.5, 5])
             .on("zoom", (event) => {
                 g.attr("transform", event.transform.toString());
             });
 
-        svg.call(zoom)
-            .call(zoom.transform, d3.zoomIdentity.translate(offsetX, offsetY));
+        svg.call(zoom).call(
+            zoom.transform,
+            d3.zoomIdentity.translate(offsetX, offsetY),
+        );
 
         const node = g
             .selectAll("g")
@@ -191,10 +215,7 @@ const BubbleChart: React.FC<BubbleChartProps> = ({ onNodeClick }) => {
                     ? `${getNames(d.data).length / 2 + 0.35}em`
                     : "0em",
             )
-            .attr("fill-opacity", 0.85)
-            .text((d) =>
-                isBubbleDataPoint(d.data) ? format(d.data.value ?? 0) : "",
-            );
+            .attr("fill-opacity", 0.85);
 
         // Type guard for BubbleDataPoint
         function isBubbleDataPoint(obj: unknown): obj is BubbleDataPoint {
@@ -211,7 +232,16 @@ const BubbleChart: React.FC<BubbleChartProps> = ({ onNodeClick }) => {
     if (loading) return <div>Loading chart...</div>;
     if (error) return <div style={{ color: "red" }}>Error: {error}</div>;
     return (
-        <div ref={containerRef} style={{ width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
+        <div
+            ref={containerRef}
+            style={{
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+            }}
+        >
             <svg ref={svgRef} />
         </div>
     );

@@ -1,0 +1,168 @@
+[
+    {
+        "id": "C2",
+        "name": "Content Hub DAM Configuration",
+        "weight_pct": 21.5,
+        "weight_components": {
+            "exam_percentage": 20,
+            "exam_questions": 10,
+            "documentation_page_count": 9,
+            "community_pain_score": 10,
+            "community_pain_max": 10,
+            "community_pain_rationale": "Highest community pain. Schema design is unanimously cited as the most critical and most difficult area of Content Hub — multiple certification prep blogs explicitly state 'schema design is the most crucial area that will decide pass or failure in the exam.' Entity definitions, option lists vs. taxonomies distinctions, relation types (one-to-many vs. many-to-many), UI page view configuration, and search component setup are all heavily nuanced. G2 reviews confirm that user permission and configuration complexity are top complaints. The platform's admin UI goes to the level of tab names and toggle settings."
+        },
+        "description": "Covers schema design, entity definitions, member groups, option lists vs. taxonomies, relation types, UI page view configuration, search components, portal pages, and conditional display fields. The most technically demanding area of the exam.",
+        "urls": {
+            "official_docs": [
+                "https://doc.sitecore.com/ch/en/developers/cloud-dev/schema.html",
+                "https://doc.sitecore.com/ch/en/users/content-hub/manage-taxonomies.html",
+                "https://doc.sitecore.com/ch/en/users/content-hub/option-lists.html",
+                "https://doc.sitecore.com/ch/en/users/content-hub/page-views.html",
+                "https://doc.sitecore.com/ch/en/users/content-hub/search-components.html",
+                "https://doc.sitecore.com/ch/en/users/content-hub/member-groups.html",
+                "https://developers.sitecore.com/dam-and-content-operations/content-hub"
+            ],
+            "community_resources": [
+                "http://navansitecorenotes.blogspot.com/2021/12/sitecore-content-hub-developer.html",
+                "https://wttech.blog/blog/2020/domain-modelling-in-sitecore-content-hub/",
+                "https://explorewithnikitavashisht.wordpress.com/2025/11/28/sitecore-content-hub-developer-certification-preparation-guide/"
+            ]
+        }
+    },
+    {
+        "id": "C1",
+        "name": "Asset Management in the Content Hub DAM",
+        "weight_pct": 17.3,
+        "weight_components": {
+            "exam_percentage": 18,
+            "exam_questions": 9,
+            "documentation_page_count": 7,
+            "community_pain_score": 7,
+            "community_pain_max": 10,
+            "community_pain_rationale": "Moderate-high community pain. G2 reviews and community blogs consistently flag metadata management complexity, lack of folder structures (assets live in a flat collection model), difficulty handling large asset volumes, AI tagging inconsistencies, and rendition configuration as recurring friction points. Developers new to the platform find the entity/asset model unintuitive compared to traditional DAMs."
+        },
+        "description": "Covers the DAM asset entity model, metadata properties, renditions, collections, asset lifecycle statuses, public links, import/export, and AI-powered tagging. Foundational to all other Content Hub competencies.",
+        "urls": {
+            "official_docs": [
+                "https://doc.sitecore.com/ch/en/users/content-hub/manage-assets.html",
+                "https://doc.sitecore.com/ch/en/users/content-hub/about-renditions.html",
+                "https://doc.sitecore.com/ch/en/users/content-hub/collections.html",
+                "https://doc.sitecore.com/ch/en/users/content-hub/import-assets.html",
+                "https://doc.sitecore.com/ch/en/users/content-hub/public-links.html",
+                "https://developers.sitecore.com/dam-and-content-operations/dam"
+            ],
+            "community_resources": [
+                "https://sitecoretek.wordpress.com/2025/04/30/certified-content-hub-developer-how-i-achieved-it/",
+                "http://navansitecorenotes.blogspot.com/2021/12/sitecore-content-hub-developer.html"
+            ]
+        }
+    },
+    {
+        "id": "C3",
+        "name": "Security and Rights Management for Content Hub DAM",
+        "weight_pct": 17,
+        "weight_components": {
+            "exam_percentage": 16,
+            "exam_questions": 8,
+            "documentation_page_count": 6,
+            "community_pain_score": 9,
+            "community_pain_max": 10,
+            "community_pain_rationale": "Very high community pain. Security in Content Hub is notoriously complex — the combination of user groups, policies, entity-level security inheritance, and digital rights management (DRM) creates a steep learning curve. Community blogs and G2 reviews specifically flag that 'user permission is not as easy as it sounds' and that understanding the difference between security inheritance toggles (e.g. Inherits security on relations) is a common exam trap. Authentication code (local vs external IDP) adds developer-specific complexity."
+        },
+        "description": "Covers user and user group management, security policies, entity-level permissions, security inheritance via relations, digital rights management (DRM), licensing enforcement, and authentication methods (local vs. external IDP).",
+        "urls": {
+            "official_docs": [
+                "https://doc.sitecore.com/ch/en/users/content-hub/security.html",
+                "https://doc.sitecore.com/ch/en/users/content-hub/user-management.html",
+                "https://doc.sitecore.com/ch/en/users/content-hub/policies.html",
+                "https://doc.sitecore.com/ch/en/users/content-hub/digital-rights-management.html",
+                "https://doc.sitecore.com/ch/en/developers/cloud-dev/authentication.html",
+                "https://www.sitecore.com/platform/sitecore-training/content-hub-courses"
+            ],
+            "community_resources": [
+                "https://blog.martinmiles.net/post/content-hub-administrator-and-developer-certification-tips-on-preparation-and-successful-pass",
+                "https://thedebugdude.com/sitecore-content-hub-developer-certification-preparation-guide/"
+            ]
+        }
+    },
+    {
+        "id": "C5",
+        "name": "Configure a Workflow using the State Flow Manager",
+        "weight_pct": 16.3,
+        "weight_components": {
+            "exam_percentage": 16,
+            "exam_questions": 8,
+            "documentation_page_count": 6,
+            "community_pain_score": 8,
+            "community_pain_max": 10,
+            "community_pain_rationale": "High community pain. State flow configuration is one of the most discussed topics in Content Hub community blogs — the interplay between states, transitions, triggers, actions, and dynamic vs. fixed assignees is complex and frequently misunderstood. Multiple dedicated blog posts and certification guides specifically call out state flows as a critical area. Connecting state flow transitions to scripted actions adds developer-specific depth that elevates the difficulty."
+        },
+        "description": "Covers the State Flow Manager: defining states and transitions, configuring linear vs. branched flows, setting fixed and dynamic assignees, attaching triggers and action scripts to transitions, and applying state flows to entity schemas.",
+        "urls": {
+            "official_docs": [
+                "https://doc.sitecore.com/ch/en/users/content-hub/state-flows.html",
+                "https://doc.sitecore.com/ch/en/users/content-hub/states.html",
+                "https://doc.sitecore.com/ch/en/users/content-hub/transitions.html",
+                "https://doc.sitecore.com/ch/en/developers/cloud-dev/triggers-and-actions.html",
+                "https://developers.sitecore.com/learn/accelerate/content-hub/implementation/state-flow-and-approval"
+            ],
+            "community_resources": [
+                "https://www.getsitecoreskills.com/2025/01/sitecore-content-hub-mastering-state.html",
+                "https://blog.martinmiles.net/post/content-hub-administrator-and-developer-certification-tips-on-preparation-and-successful-pass"
+            ]
+        }
+    },
+    {
+        "id": "C4",
+        "name": "Content Creation and Management with CMP",
+        "weight_pct": 15.1,
+        "weight_components": {
+            "exam_percentage": 16,
+            "exam_questions": 8,
+            "documentation_page_count": 6,
+            "community_pain_score": 6,
+            "community_pain_max": 10,
+            "community_pain_rationale": "Moderate community pain. CMP is generally considered more approachable than the DAM configuration and schema areas. Community feedback notes that understanding how CMP content types map to the underlying entity schema is the main conceptual hurdle. Campaign hierarchy and the relationship between content items and assets cause occasional confusion. Less blogged about than schema or state flows."
+        },
+        "description": "Covers the Content Marketing Platform (CMP) module: content types, the content board, campaign planning, content lifecycle stages, linking content to DAM assets, and publishing content across channels.",
+        "urls": {
+            "official_docs": [
+                "https://doc.sitecore.com/ch/en/users/content-hub/content-marketing-platform.html",
+                "https://doc.sitecore.com/ch/en/users/content-hub/manage-content.html",
+                "https://doc.sitecore.com/ch/en/users/content-hub/campaigns.html",
+                "https://doc.sitecore.com/ch/en/users/content-hub/content-board.html",
+                "https://www.sitecore.com/products/sitecore-training/content-hub-courses"
+            ],
+            "community_resources": [
+                "https://sitecoretek.wordpress.com/2025/04/30/certified-content-hub-developer-how-i-achieved-it/",
+                "https://www.getfishtank.com/insights/what-is-sitecore-content-hub-dam-and-operations"
+            ]
+        }
+    },
+    {
+        "id": "C6",
+        "name": "Project Management with MRM",
+        "weight_pct": 12.8,
+        "weight_components": {
+            "exam_percentage": 14,
+            "exam_questions": 7,
+            "documentation_page_count": 5,
+            "community_pain_score": 5,
+            "community_pain_max": 10,
+            "community_pain_rationale": "Lower community pain relative to other competencies. MRM (Marketing Resource Management) is generally seen as the most business-facing and least technically nuanced module. Community certification guides mention it but spend less time on it than schema, security, or state flows. The main challenges are understanding the project/job/task hierarchy and budget tracking, which are more administrative than technical."
+        },
+        "description": "Covers the Marketing Resource Management (MRM) module: creating and managing projects and jobs, task assignment, multi-stage project configuration, resource planning, budget tracking, and integrating MRM workflows with DAM assets.",
+        "urls": {
+            "official_docs": [
+                "https://doc.sitecore.com/ch/en/users/content-hub/marketing-resource-management.html",
+                "https://doc.sitecore.com/ch/en/users/content-hub/projects.html",
+                "https://doc.sitecore.com/ch/en/users/content-hub/jobs.html",
+                "https://www.sitecore.com/products/sitecore-training/content-hub-courses"
+            ],
+            "community_resources": [
+                "https://sitecoretek.wordpress.com/2025/04/30/certified-content-hub-developer-how-i-achieved-it/",
+                "https://venuvustipalli.com/content-hub-developer-certification/"
+            ]
+        }
+    }
+]
