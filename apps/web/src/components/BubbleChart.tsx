@@ -1,9 +1,13 @@
 ﻿import { useRef, useEffect } from "react";
 import * as d3 from "d3";
 
-interface BubbleDataPoint {
+export interface BubbleDataPoint {
     id: string;
     value: number;
+}
+
+interface BubbleChartProps {
+    onNodeClick?: (node: BubbleDataPoint) => void;
 }
 
 const data: BubbleDataPoint[] = [
@@ -49,7 +53,7 @@ const getGroup = (d: BubbleDataPoint): string => d.id.split(".")[1] ?? "";
 const getNames = (d: BubbleDataPoint): string[] =>
     getName(d).split(/(?=[A-Z][a-z])|\s+/g);
 
-const BubbleChart: React.FC = () => {
+const BubbleChart: React.FC<BubbleChartProps> = ({ onNodeClick }) => {
     const svgRef = useRef<SVGSVGElement | null>(null);
 
     useEffect(() => {
@@ -105,7 +109,13 @@ const BubbleChart: React.FC = () => {
             .selectAll("g")
             .data(root.leaves())
             .join("g")
-            .attr("transform", (d) => `translate(${d.x},${d.y})`);
+            .attr("transform", (d) => `translate(${d.x},${d.y})`)
+            .style("cursor", "pointer")
+            .on("click", (event, d) => {
+                if (onNodeClick) {
+                    onNodeClick(d as BubbleDataPoint);
+                }
+            });
 
         node.append("title").text(
             (d) =>
@@ -141,7 +151,7 @@ const BubbleChart: React.FC = () => {
             .text((d) =>
                 format((d as unknown as { value: number }).value ?? 0),
             );
-    }, []);
+    }, [onNodeClick]);
 
     return <svg ref={svgRef} />;
 };
