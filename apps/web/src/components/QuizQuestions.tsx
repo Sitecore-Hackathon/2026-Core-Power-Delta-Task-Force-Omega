@@ -10,7 +10,7 @@ export const QuizQuestions = ({ questions }: QuizQuestionsProps) => {
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
     if (!questions || questions.length === 0) {
-        return <div>No questions available.</div>;
+        return <div style={{ color: "var(--text-secondary)", fontSize: 14 }}>No questions available.</div>;
     }
 
     const handleOptionSelect = (option: string) => {
@@ -31,69 +31,120 @@ export const QuizQuestions = ({ questions }: QuizQuestionsProps) => {
                 : Math.min(prev + 1, questions.length - 1),
         );
     };
+
     return (
         <div>
-            <h2 style={{ marginBottom: 12 }}></h2>
-            <p style={{ marginBottom: 18 }}>
+            <p style={{
+                marginBottom: 18,
+                fontSize: 14,
+                lineHeight: 1.7,
+                color: "var(--text-primary)",
+            }}>
                 {questions[activeIndex].question}
             </p>
-            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                {questions[activeIndex].options?.map((option, idx) => (
-                    <label
-                        key={idx}
-                        style={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: 8,
-                            padding: "8px 12px",
-                            border: "1px solid #ccc",
-                            borderRadius: 16,
-                            cursor: "pointer",
-                            backgroundColor: "#f1ecec",
-                        }}
-                    >
-                        <input
-                            type="radio"
-                            name={`question-${activeIndex}`}
-                            value={option}
-                            checked={selectedOption === option}
-                            onChange={() => handleOptionSelect(option)}
-                        />
-                        {option}
-                    </label>
-                ))}
+            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                {questions[activeIndex].options?.map((option, idx) => {
+                    const isSelected = selectedOption === option;
+                    const isCorrect = feedback !== null && option[0] === questions[activeIndex].correct_answer;
+                    const isWrong = feedback !== null && isSelected && feedback;
+                    return (
+                        <label
+                            key={idx}
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: 10,
+                                padding: "10px 14px",
+                                border: `1px solid ${isCorrect && feedback !== null ? "#86efac" : isWrong ? "#fca5a5" : isSelected ? "var(--accent)" : "var(--border)"}`,
+                                borderRadius: 10,
+                                cursor: "pointer",
+                                background: isCorrect && feedback !== null ? "#f0fdf4" : isWrong ? "#fef2f2" : isSelected ? "rgba(79,70,229,0.04)" : "var(--surface)",
+                                fontSize: 13,
+                                lineHeight: 1.5,
+                                transition: "all 0.2s ease",
+                            }}
+                            onMouseEnter={(e) => {
+                                if (feedback === null) e.currentTarget.style.borderColor = "var(--accent-light)";
+                            }}
+                            onMouseLeave={(e) => {
+                                if (feedback === null && !isSelected) e.currentTarget.style.borderColor = "var(--border)";
+                            }}
+                        >
+                            <input
+                                type="radio"
+                                name={`question-${activeIndex}`}
+                                value={option}
+                                checked={isSelected}
+                                onChange={() => handleOptionSelect(option)}
+                                style={{ accentColor: "var(--accent)" }}
+                            />
+                            {option}
+                        </label>
+                    );
+                })}
             </div>
             {feedback !== null && (
                 <div
                     style={{
-                        margin: "24px 12px",
-                        color: feedback ? "red" : "green",
-                        backgroundColor: feedback ? "#ffe5e5" : "#e5ffe5",
-                        padding: "12px",
-                        borderRadius: 12,
+                        margin: "16px 0",
+                        color: feedback ? "#991b1b" : "#166534",
+                        backgroundColor: feedback ? "#fef2f2" : "#f0fdf4",
+                        padding: "12px 16px",
+                        borderRadius: 10,
+                        border: `1px solid ${feedback ? "#fecaca" : "#bbf7d0"}`,
+                        fontSize: 13,
+                        lineHeight: 1.6,
+                        animation: "fadeIn 0.2s ease",
                     }}
                 >
-                    {feedback ? "Incorrect." : "Correct!"}
-                    <p>{questions[activeIndex].explanation}</p>
+                    <strong>{feedback ? "Incorrect" : "Correct!"}</strong>
+                    <p style={{ margin: "6px 0 0" }}>{questions[activeIndex].explanation}</p>
                 </div>
             )}
             <div
                 style={{
                     display: "flex",
                     justifyContent: "space-between",
-                    margin: "24px 0",
+                    alignItems: "center",
+                    margin: "20px 0",
                 }}
             >
                 <button
                     onClick={() => handleNavigation("prev")}
                     disabled={activeIndex === 0}
+                    style={{
+                        padding: "8px 16px",
+                        borderRadius: 8,
+                        border: "1px solid var(--border)",
+                        background: "var(--surface)",
+                        fontSize: 13,
+                        fontWeight: 500,
+                        color: activeIndex === 0 ? "var(--border)" : "var(--text-primary)",
+                        cursor: activeIndex === 0 ? "not-allowed" : "pointer",
+                    }}
                 >
                     Prev
                 </button>
-                <div>{`Question ${activeIndex + 1} of ${questions.length}`}</div>
+                <div style={{
+                    fontSize: 12,
+                    color: "var(--text-secondary)",
+                    fontWeight: 500,
+                }}>
+                    {activeIndex + 1} / {questions.length}
+                </div>
                 <button
                     onClick={() => handleNavigation("next")}
                     disabled={activeIndex === questions.length - 1}
+                    style={{
+                        padding: "8px 16px",
+                        borderRadius: 8,
+                        border: "1px solid var(--border)",
+                        background: "var(--surface)",
+                        fontSize: 13,
+                        fontWeight: 500,
+                        color: activeIndex === questions.length - 1 ? "var(--border)" : "var(--text-primary)",
+                        cursor: activeIndex === questions.length - 1 ? "not-allowed" : "pointer",
+                    }}
                 >
                     Next
                 </button>
