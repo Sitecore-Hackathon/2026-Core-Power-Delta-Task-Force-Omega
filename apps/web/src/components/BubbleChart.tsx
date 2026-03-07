@@ -85,19 +85,40 @@ const BubbleChart: React.FC<BubbleChartProps> = ({ onNodeClick, product }) => {
         const { width, height } = dimensions;
         const size = Math.max(width, height) * 0.85;
         const format = d3.format(",d");
-        const color = d3.scaleOrdinal([
-            "#eb1f1f",
-            "#d41616",
-            "#c41230",
-            "#a8102a",
-            "#f04e4e",
-            "#b91c1c",
-            "#991b1b",
-            "#e53935",
-            "#c62828",
-            "#ef5350",
-            "#d32f2f",
-        ]);
+        // Color palettes for different products
+        const colorPalettes: Record<string, string[]> = {
+            sitecoreai: [
+                "#eb1f1f",
+                "#d41616",
+                "#c41230",
+                "#a8102a",
+                "#f04e4e",
+                "#b91c1c",
+                "#991b1b",
+                "#e53935",
+                "#c62828",
+                "#ef5350",
+                "#d32f2f",
+            ],
+            contenthub: [
+                "#1f77eb",
+                "#166ad4",
+                "#125cc4",
+                "#104aa8",
+                "#4e8ff0",
+                "#1c5cb9",
+                "#1b4999",
+                "#397be5",
+                "#286ac6",
+                "#5093ef",
+                "#2f6fd3",
+            ],
+        };
+        const palette =
+            product && colorPalettes[product]
+                ? colorPalettes[product]
+                : colorPalettes.sitecoreai;
+        const color = d3.scaleOrdinal(palette);
 
         const pack = d3
             .pack<{ children: BubbleDataPoint[] }>()
