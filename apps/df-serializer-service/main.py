@@ -4,6 +4,7 @@ import json
 import os
 import json
 from pathlib import Path
+from data import competencies
 
 app = FastAPI(
     title="CompetencySerializer API",
@@ -11,15 +12,17 @@ app = FastAPI(
     version="1.0.0"
 )
 
-BASE_DIR = Path(__file__).resolve().parent
-DATA_FILE = BASE_DIR / "competencies-flat-schema.json"
+# BASE_DIR = Path(__file__).resolve().parent
+# DATA_FILE = BASE_DIR / "competencies-flat-schema.json"
 
-def load_data() -> list:
-    if not os.path.exists(DATA_FILE):
-        raise HTTPException(status_code=500, detail=f"Data file not found: {DATA_FILE}")
-    with open(DATA_FILE, "r") as f:
-        return json.load(f)
+# def load_data() -> list:
+#     if not os.path.exists(DATA_FILE):
+#         raise HTTPException(status_code=500, detail=f"Data file not found: {DATA_FILE}")
+#     with open(DATA_FILE, "r") as f:
+#         return json.load(f)
 
+def load_data():
+    return competencies
 
 @app.get(
     "/competencies",
