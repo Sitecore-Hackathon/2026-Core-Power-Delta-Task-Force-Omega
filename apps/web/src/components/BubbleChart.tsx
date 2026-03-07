@@ -83,7 +83,6 @@ const BubbleChart: React.FC<BubbleChartProps> = ({ onNodeClick }) => {
         if (!svgRef.current || data.length === 0) return;
 
         const { width, height } = dimensions;
-        const margin = 1;
         const size = Math.max(width, height) * 0.85;
         const format = d3.format(",d");
         const color = d3.scaleOrdinal([
