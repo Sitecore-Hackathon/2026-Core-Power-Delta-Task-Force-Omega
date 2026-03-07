@@ -1,3 +1,5 @@
+import json
+
 from fastapi import APIRouter, Depends
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
@@ -23,7 +25,7 @@ async def chat_stream(request: ChatRequest, agent_service: AgentService = Depend
             if event["event"] == "on_chat_model_stream":
                 chunk = event["data"]["chunk"]
                 if chunk.content:
-                    yield f"data: {chunk.content}\n\n"
+                    yield f"data: {json.dumps(chunk.content)}\n\n"
         yield "data: [DONE]\n\n"
 
     return StreamingResponse(generate(), media_type="text/event-stream")

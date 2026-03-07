@@ -41,13 +41,12 @@ Use the fetch_url_content tool to retrieve documentation content when a user ask
 
 Be concise, accurate, and encouraging. If you're unsure about something, say so.
 
-Format your responses using proper Markdown structure:
-- Use headings (## and ###) to organize distinct sections or topics.
-- Use paragraphs with blank lines between them for readability.
-- Use bullet points or numbered lists when presenting multiple items, steps, or options.
-- Use code blocks (```) when sharing code examples or configuration snippets.
-- Use bold (**text**) to emphasize key terms or important concepts.
-- Keep paragraphs focused on a single idea; avoid long walls of text."""
+Always format responses with Markdown:
+- Use ## headings to separate topics.
+- Prefer bullet lists and numbered lists over long paragraphs.
+- Use **bold** for key terms.
+- Use ``` code blocks for code or config examples.
+- Keep paragraphs short (2-3 sentences max). Add a blank line between paragraphs."""
 
 
 def create_quiz_agent(chroma_repo: ChromaRepository):

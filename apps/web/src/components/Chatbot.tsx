@@ -89,20 +89,28 @@ const Chatbot: React.FC<ChatbotProps> = ({ open, onClose }) => {
                 if (done) break;
 
                 const chunk = decoder.decode(value, { stream: true });
-                const lines = chunk.split("\n");
+                // SSE events are separated by double newlines
+                const events = chunk.split("\n\n");
 
-                for (const line of lines) {
-                    if (line.startsWith("data: ")) {
-                        const data = line.slice(6);
-                        if (data === "[DONE]") break;
-                        accumulated += data;
-                        const text = accumulated;
-                        setMessages((prev) => {
-                            const updated = [...prev];
-                            updated[botIndex] = { role: "bot", text };
-                            return updated;
-                        });
+                for (const event of events) {
+                    const lines = event.split("\n");
+                    for (const line of lines) {
+                        if (line.startsWith("data: ")) {
+                            const data = line.slice(6);
+                            if (data === "[DONE]") break;
+                            try {
+                                accumulated += JSON.parse(data);
+                            } catch {
+                                accumulated += data;
+                            }
+                        }
                     }
+                    const text = accumulated;
+                    setMessages((prev) => {
+                        const updated = [...prev];
+                        updated[botIndex] = { role: "bot", text };
+                        return updated;
+                    });
                 }
             }
         } catch (err) {
