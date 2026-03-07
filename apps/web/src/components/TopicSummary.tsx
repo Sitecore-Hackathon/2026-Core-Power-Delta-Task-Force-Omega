@@ -22,37 +22,62 @@ const TopicSummary: React.FC<TopicSummaryProps> = ({ node, onClose }) => {
     };
 
     return (
-        <div style={{ padding: 24, position: "relative" }}>
+        <div
+            style={{
+                position: "relative",
+                padding: 36,
+                width: "100%",
+                // maxWidth: 600,
+                // minWidth: 400,
+                height: "100%",
+                maxHeight: "calc(100vh - 60px)",
+                overflowY: "auto",
+                boxSizing: "border-box",
+                background: "#fff",
+                borderRadius: 20,
+                boxShadow: "0 2px 24px #0002",
+                margin: "0 auto",
+                display: "flex",
+                flexDirection: "column",
+                gap: 24,
+            }}
+        >
             <button
                 onClick={onClose}
                 style={{
                     position: "absolute",
-                    top: 12,
-                    right: 12,
+                    top: 18,
+                    right: 18,
                     background: "#eee",
                     border: "none",
-                    borderRadius: 6,
-                    padding: "4px 10px",
+                    borderRadius: 8,
+                    padding: "6px 16px",
                     cursor: "pointer",
                     fontWeight: 600,
+                    fontSize: 22,
+                    zIndex: 2,
                 }}
                 aria-label="Close summary"
             >
                 ×
             </button>
-            <div>
-                <h1>{node.name}</h1>
-                <div>
-                    <p>{node.description}</p>
+            <div style={{ width: "100%", overflow: "hidden" }}>
+                <h1 style={{ fontSize: 28, marginBottom: 12 }}>{node.name}</h1>
+                <div style={{ marginBottom: 18 }}>
+                    <p style={{ fontSize: 16, lineHeight: 1.6 }}>
+                        {node.description}
+                    </p>
                 </div>
-                <div>
-                    <h2>Official Documentation</h2>
-                    <ul>
+                <div style={{ marginBottom: 18 }}>
+                    <h2 style={{ fontSize: 20, marginBottom: 8 }}>
+                        Official Documentation
+                    </h2>
+                    <ul style={{ paddingLeft: 18, wordBreak: "break-all" }}>
                         {documentationLinks.official_docs.length === 0 && (
                             <li>No links</li>
                         )}
                         {documentationLinks.official_docs.map((link, idx) => (
-                            <li key={idx}>
+                            <li key={idx} style={{ marginBottom: 6 }}>
                                 <a
                                     href={link}
                                     target="_blank"
@@ -64,14 +89,16 @@ const TopicSummary: React.FC<TopicSummaryProps> = ({ node, onClose }) => {
                         ))}
                     </ul>
                 </div>
-                <div>
-                    <h2>Community Resources</h2>
-                    <ul>
+                <div style={{ marginBottom: 18 }}>
+                    <h2 style={{ fontSize: 20, marginBottom: 8 }}>
+                        Community Resources
+                    </h2>
+                    <ul style={{ paddingLeft: 18, wordBreak: "break-all" }}>
                         {documentationLinks.community_resources.length ===
                             0 && <li>No links</li>}
                         {documentationLinks.community_resources.map(
                             (link, idx) => (
-                                <li key={idx}>
+                                <li key={idx} style={{ marginBottom: 6 }}>
                                     <a
                                         href={link}
                                         target="_blank"
@@ -84,7 +111,20 @@ const TopicSummary: React.FC<TopicSummaryProps> = ({ node, onClose }) => {
                         )}
                     </ul>
                 </div>
-                <button type="button">Test Your Knowledge</button>
+                <button
+                    type="button"
+                    style={{
+                        marginTop: 12,
+                        padding: "10px 20px",
+                        fontSize: 16,
+                        borderRadius: 8,
+                        border: "none",
+                        fontWeight: 600,
+                        cursor: "pointer",
+                    }}
+                >
+                    Test Your Knowledge
+                </button>
             </div>
         </div>
     );

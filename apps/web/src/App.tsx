@@ -134,8 +134,8 @@ function App() {
                 <div
                     style={{
                         flex: 0.4,
-                        minWidth: 340,
-                        maxWidth: 500,
+                        // minWidth: 340,
+                        // maxWidth: 500,
                         background: "#f8f8ff",
                         boxShadow: selectedNode ? "4px 0 24px 0 #0001" : "none",
                         borderRadius: "0 16px 16px 0",
