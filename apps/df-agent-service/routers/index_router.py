@@ -19,6 +19,6 @@ def search(search_term: str, chroma_repo: ChromaRepository = Depends(get_chroma_
     return chroma_repo.search(search_term)
 
 
-@index_router.post("/quiz/{competency_topic}")
+@index_router.get("/quiz/{competency_topic}")
 def generate_quiz(competency_topic: str, agent: AgentService = Depends(get_agent_service)):
     return agent.generate_quiz(competency_topic)
