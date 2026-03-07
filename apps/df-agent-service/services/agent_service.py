@@ -69,7 +69,7 @@ def create_quiz_agent(chroma_repo: ChromaRepository):
             return f"Error fetching {url}: {e}"
 
     tools = [search_competencies, fetch_url_content]
-    llm = ChatOpenAI(model="gpt-4o", temperature=0)
+    llm = ChatOpenAI(model="gpt-4.1", temperature=0)
     return create_react_agent(llm, tools, prompt=QUIZ_SYSTEM_PROMPT)
 
 
@@ -93,7 +93,7 @@ def create_chat_agent(chroma_repo: ChromaRepository):
             return f"Error fetching {url}: {e}"
 
     tools = [search_competencies, fetch_url_content]
-    llm = ChatOpenAI(model="gpt-4o", temperature=0.7, streaming=True)
+    llm = ChatOpenAI(model="gpt-4.1", temperature=0.7, streaming=True)
     return create_react_agent(llm, tools, prompt=CHAT_SYSTEM_PROMPT)
 
 
