@@ -7,7 +7,7 @@ WORKDIR /app
 COPY pyproject.toml .
 RUN uv sync --no-dev --no-install-project
 
-COPY main.py .
+COPY . .
 
 EXPOSE 8000
 
