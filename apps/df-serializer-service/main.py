@@ -13,7 +13,7 @@ app = FastAPI(
 )
 
 BASE_DIR = Path(__file__).resolve().parent
-DATA_FILE = BASE_DIR / "competencies-flat-schema.json"
+DATA_FILE = BASE_DIR / "sitecoreai-flat-schema.json"
 
 def load_data() -> list:
     if not os.path.exists(DATA_FILE):
