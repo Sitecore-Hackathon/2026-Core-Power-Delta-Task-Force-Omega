@@ -9,7 +9,7 @@ app = FastAPI(
     version="1.0.0"
 )
 
-DATA_FILE = os.path.join(os.path.dirname(__file__), "competencies-flat-schema.json")
+DATA_FILE = "competencies-flat-schema.json"
 
 
 def load_data() -> list:
