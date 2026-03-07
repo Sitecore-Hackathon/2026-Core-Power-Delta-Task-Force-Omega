@@ -121,26 +121,60 @@ function App() {
                 style={{
                     flex: 1,
                     display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
+                    flexDirection: "row",
+                    alignItems: "stretch",
                     justifyContent: "center",
                     padding: 20,
                     overflow: "auto",
+                    position: "relative",
+                    background: "#fff",
                 }}
             >
-                {selectedNode ? (
-                    <TopicSummary
-                        title="topic"
-                        summary="summary"
-                        documentationLinks={{
-                            official_docs: [],
-                            community_resources: [],
-                        }}
-                    />
-                ) : view === "chart" ? (
+                {/* TopicSummary slides in from the left */}
+                <div
+                    style={{
+                        flex: 0.4,
+                        minWidth: 340,
+                        maxWidth: 500,
+                        background: "#f8f8ff",
+                        boxShadow: selectedNode ? "4px 0 24px 0 #0001" : "none",
+                        borderRadius: "0 16px 16px 0",
+                        marginRight: selectedNode ? 0 : -520,
+                        opacity: selectedNode ? 1 : 0,
+                        pointerEvents: selectedNode ? "auto" : "none",
+                        transition: "all 0.5s cubic-bezier(.77,0,.18,1)",
+                        position: "relative",
+                        zIndex: 2,
+                        display: selectedNode ? "block" : "none",
+                    }}
+                >
+                    {selectedNode && (
+                        <TopicSummary
+                            node={selectedNode}
+                            onClose={() => setSelectedNode(null)}
+                        />
+                    )}
+                </div>
+                {/* BubbleChart slides to the right */}
+                <div
+                    style={{
+                        flex: selectedNode ? 0.6 : 1,
+                        maxWidth: selectedNode ? 600 : 900,
+                        minWidth: 0,
+                        transition: "all 0.5s cubic-bezier(.77,0,.18,1)",
+                        transform: selectedNode
+                            ? "translateX(120px)"
+                            : "translateX(0)",
+                        zIndex: 1,
+                        display: view === "chart" ? "block" : "none",
+                    }}
+                >
                     <BubbleChart onNodeClick={setSelectedNode} />
-                ) : (
-                    <Chatbot />
+                </div>
+                {view === "chat" && (
+                    <div style={{ width: "100%", height: "100%" }}>
+                        <Chatbot />
+                    </div>
                 )}
             </main>
 
