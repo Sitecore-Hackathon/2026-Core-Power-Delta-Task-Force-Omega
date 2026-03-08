@@ -1,40 +1,83 @@
 # Hackathon Submission Entry form
 
+> __Important__  
+> 
+> Copy and paste the content of this file into README.md or face automatic __disqualification__  
+> All headlines and subheadlines shall be retained if not noted otherwise.  
+> Fill in text in each section as instructed and then delete the existing text, including this blockquote.
+
+You can find a very good reference to Github flavoured markdown reference in [this cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet). If you want something a bit more WYSIWYG for editing then could use [StackEdit](https://stackedit.io/app) which provides a more user friendly interface for generating the Markdown code. Those of you who are [VS Code fans](https://code.visualstudio.com/docs/languages/markdown#_markdown-preview) can edit/preview directly in that interface too.
+
 ## Team name
-Core Power Delta Task Force Omega
+⟹ Write the name of your Hackathon team here
 
 ## Category
-Best tool supporting Sitecore Development (not built on Sitecore)
+⟹ Write the name of the selected category
 
 ## Description
-Core Power is a streamlined, one-stop platform for Sitecore learning and development, built to support developers at every stage of their journey. We created Core Power to simplify how developers learn the Sitecore ecosystem, since the official documentation—while comprehensive—can often feel overwhelming, especially for newcomers. Its largely flat structure makes it difficult to understand how concepts relate to one another, which topics are foundational, and which areas are most important for certifications or real-world development. Core Power addresses this by organizing knowledge into clear, logical learning paths that group related concepts together and highlight their importance within the broader platform. To further personalize the experience, the platform uses AI agents to intelligently suggest learning paths based on a developer’s goals and experience level, along with a chatbot that helps answer questions, explain concepts, and guide users through the learning journey.
+⟹ Write a clear description of your hackathon entry.  
 
+  - Module Purpose
+  - What problem was solved (if any)
+    - How does this module solve it
+
+_You can alternately paste a [link here](#docs) to a document within this repo containing the description._
 
 ## Video link
-[DEMO Video](https://discord.com/channels/1479932665208770572/1479932665649168478/1479994866430771312)
+⟹ Provide a video highlighing your Hackathon module submission and provide a link to the video. You can use any video hosting, file share or even upload the video to this repository. _Just remember to update the link below_
+
+⟹ [Replace this Video link](#video-link)
+
+## Pre-requisites and Dependencies
+
+⟹ Does your module rely on other Sitecore modules or frameworks?
+
+- List any dependencies
+- Or other modules that must be installed
+- Or services that must be enabled/configured
+
+_Remove this subsection if your entry does not have any prerequisites other than Sitecore_
 
 ## Installation instructions
+⟹ Write a short clear step-wise instruction on how to install your module.  
 
-Visit ![https://two026-core-power-delta-task-force-omega.onrender.com](https://two026-core-power-delta-task-force-omega.onrender.com) to enjoy the experience.
-This a standalone app accessible in a browser. There are no additional installation instructions. 
+> _A simple well-described installation process is required to win the Hackathon._  
+> Feel free to use any of the following tools/formats as part of the installation:
+> - Sitecore Package files
+> - Docker image builds
+> - Sitecore CLI
+> - msbuild
+> - npm / yarn
+> 
+> _Do not use_
+> - TDS
+> - Unicorn
+ 
+for example:
+
+1. Use the Sitecore Installation wizard to install the [package](#link-to-package)
+2. ...
+3. profit
+
+### Configuration
+⟹ If there are any custom configuration that has to be set manually then remember to add all details here.
+
+_Remove this subsection if your entry does not require any configuration that is not fully covered in the installation instructions already_
 
 ## Usage instructions
-The app homepage is a diagram of core competencies for the default Sitecore product, Sitecore AI. The user sees these sized base on their relative prevalance/emphasis across documentation and community data (forums, blogs, etc). 
-![Homepage](docs/images/1%20-%20app%20homepage.png)
+⟹ Provide documentation about your module, how do the users use your module, where are things located, what do the icons mean, are there any secret shortcuts etc.
 
-Here, the user can:
-- select a different product to explore using a dropdown as shown here
-![Product Selection](docs/images/2%20-%20product%20selection.png)
+Include screenshots where necessary. You can add images to the `./images` folder and then link to them from your documentation:
 
-- select a topic by clicking it
-![Select topic](docs/images/2%20-%20product%20selection.png)
+![Hackathon Logo](docs/images/hackathon.png?raw=true "Hackathon Logo")
 
-- viewing topic summary/related resources and optionally start testing knowledge with a quiz upon selection
-![Select topic](docs/images/4%20-%20selecting%20topic%20to%20view%20details.png)
+You can embed images of different formats too:
 
-- take Agent generated quiz to test platform knowledge and recieve feedback on answers
-![Take q](docs/images/5%20-%20accessing%20quiz.png)
-![Quiz feedback](docs/images/6%20-%20quiz%20feedback.png)
+![Deal With It](docs/images/deal-with-it.gif?raw=true "Deal With It")
 
-- interact with Agent via chat for conversational platform support
-![Agent chat](docs/images/7%20-%20accessing%20chat%20experience.png)
+And you can embed external images too:
+
+![Random](https://thiscatdoesnotexist.com/)
+
+## Comments
+If you'd like to make additional comments that is important for your module entry.
