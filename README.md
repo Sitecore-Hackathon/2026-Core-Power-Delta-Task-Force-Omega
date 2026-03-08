@@ -58,3 +58,9 @@ Additional implementation details are available in the following README files:
 [Serialization Agent Service README](/apps/df-serializer-service/README.md)
 
 [Project Documentation](/docs/Core%20Power%20Knowledge%20Explorer.pdf)
+
+**A note on agent hallucinations** - To combat agent hallucinations, our team instrumented each of our agents (chat and quiz) with LangSmith. LangSmith is a tool that allows us to capture telemetry on tool calls, token consumption, and I/O within each agent. We plan to use this tracing alongside our established RAG capabilities to build multi-agent validation systems that ensure generated content, such as recommendations and links to blogs, forums, and docs, is accurate.
+
+**Subset of documentation** - For this iteration, we are only concerned with a subset of the full Sitecore documentation. We felt this would allow us to establish a process for capturing, refining, and leveraging Sitecore information that could be repeated across different contexts.
+
+**Volatile vector storage** - One of our priorities for the agentic chat was speed. Because of this, we opted to leverage an in-memory vector database called ChromaDB. This cuts down on latency; however, it required us to orchestrate seeding vectors on API startup. This is not something we planned to bring into production, but a trade-off we accepted given the MVP nature of this build.
