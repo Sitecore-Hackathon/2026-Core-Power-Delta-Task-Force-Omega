@@ -7,14 +7,8 @@ Core Power Delta Task Force Omega
 Best tool supporting Sitecore Development (not built on Sitecore)
 
 ## Description
-The purpose of this module is to serve as a companion for development and learning. Our team identified 3 areas in which development teams could be better supported:
-1. Accessing synthesized, broader official and community knowledge of Sitecore Products for support with broad and specific answers and suggestions during pitch, discovery, prototype, and development activities
-2. Accessing a personalized, interactive, learning path outside of Sitecore elearning and developer documentation
-3. Broadening the range of practice questions available to professionals pursuing certifications and ongoing sharpening of Sitecore platform skills and understanding
+Core Power is a streamlined, one-stop platform for Sitecore learning and development, built to support developers at every stage of their journey. We created Core Power to simplify how developers learn the Sitecore ecosystem, since the official documentation—while comprehensive—can often feel overwhelming, especially for newcomers. Its largely flat structure makes it difficult to understand how concepts relate to one another, which topics are foundational, and which areas are most important for certifications or real-world development. Core Power addresses this by organizing knowledge into clear, logical learning paths that group related concepts together and highlight their importance within the broader platform. To further personalize the experience, the platform uses AI agents to intelligently suggest learning paths based on a developer’s goals and experience level, along with a chatbot that helps answer questions, explain concepts, and guide users through the learning journey.
 
-Drawing from Sitecore resources, this interactive tool visualizes core platform concepts as defined by Sitecore to support developers in their learning and implementation journies. Core concepts are represented in varying sizes that serve as an indicator of it's relative significance/complexity. Users are able to select a topic to view a summary, links to official related resources, and take a quiz to test their understand the topic. 
-
-This experience is powered by a serializatoin service which provides the app access to Sitecore documentation data and vectorizes it for AI Agents that generate quizzes and chat responses.
 
 ## Video link
 ⟹ Provide a video highlighing your Hackathon module submission and provide a link to the video. You can use any video hosting, file share or even upload the video to this repository. _Just remember to update the link below_
@@ -51,6 +45,6 @@ Here, the user can:
 ## Comments
 
 Additional implementation details are available in the following README files:
-![Web App README](apps/web/README.md)
-![App Agent Service README](apps/df-agent-service/README.md)
-![Serialization Agent Service README](apps/df-serializer-service/README.md)
+![Web App README](/apps/web/README.md)
+![App Agent Service README](/apps/df-agent-service/README.md)
+![Serialization Agent Service README](/apps/df-serializer-service/README.md)
