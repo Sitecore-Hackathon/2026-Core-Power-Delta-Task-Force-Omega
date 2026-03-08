@@ -56,3 +56,5 @@ Additional implementation details are available in the following README files:
 [App Agent Service README](/apps/df-agent-service/README.md)
 
 [Serialization Agent Service README](/apps/df-serializer-service/README.md)
+
+[Project Documentation](/docs/Core%20Power%20Knowledge%20Explorer.pdf)
