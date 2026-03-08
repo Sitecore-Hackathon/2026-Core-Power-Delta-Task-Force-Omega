@@ -34,13 +34,13 @@ Here, the user can:
 [Product Selection](docs/images/2%20-%20product%20selection.png)
 
 - select a topic by clicking it
-[Select topic](docs/images/2%20-%20product%20selection.png)
+[Select topic](docs/images/3%20-%20hovering%20over%20and%20selecting%20a%20topic.png)
 
 - viewing topic summary/related resources and optionally start testing knowledge with a quiz upon selection
 [Select topic](docs/images/4%20-%20selecting%20topic%20to%20view%20details.png)
 
 - take Agent generated quiz to test platform knowledge and recieve feedback on answers
-[Take q](docs/images/5%20-%20accessing%20quiz.png)
+[Take quiz](docs/images/5%20-%20accessing%20quiz.png)
 [Quiz feedback](docs/images/6%20-%20quiz%20feedback.png)
 
 - interact with Agent via chat for conversational platform support
@@ -50,6 +50,9 @@ Here, the user can:
 ## Comments
 
 Additional implementation details are available in the following README files:
+
 [Web App README](/apps/web/README.md)
+
 [App Agent Service README](/apps/df-agent-service/README.md)
+
 [Serialization Agent Service README](/apps/df-serializer-service/README.md)
