@@ -1,169 +1,60 @@
-![Hackathon Logo](docs/images/hackathon.png?raw=true "Hackathon Logo")
+[Hackathon Logo](docs/images/hackathon.png?raw=true "Hackathon Logo")
 
 # Sitecore Hackathon 2026
 
 - MUST READ: **[Submission requirements](SUBMISSION_REQUIREMENTS.md)**
 - [Entry form template](ENTRYFORM.md)
 
-### ⟹ [Insert your documentation here](ENTRYFORM.md) <<
+# Hackathon Submission Entry form
+
+## Team name
+Core Power Delta Task Force Omega
+
+## Category
+Best tool supporting Sitecore Development (not built on Sitecore)
+
+## Description
+Core Power is a streamlined, one-stop platform for Sitecore learning and development, built to support developers at every stage of their journey. We created Core Power to simplify how developers learn the Sitecore ecosystem, since the official documentation—while comprehensive—can often feel overwhelming, especially for newcomers. Its largely flat structure makes it difficult to understand how concepts relate to one another, which topics are foundational, and which areas are most important for certifications or real-world development. Core Power addresses this by organizing knowledge into clear, logical learning paths that group related concepts together and highlight their importance within the broader platform. To further personalize the experience, the platform uses AI agents to intelligently suggest learning paths based on a developer’s goals and experience level, along with a chatbot that helps answer questions, explain concepts, and guide users through the learning journey.
 
 
-# Turborepo starter
+## Video link
+[DEMO Video](https://youtu.be/P8KvXNnx63E)
 
-This Turborepo starter is maintained by the Turborepo core team.
+## Installation instructions
 
-## Using this example
+Visit [https://two026-core-power-delta-task-force-omega.onrender.com](https://two026-core-power-delta-task-force-omega.onrender.com) to enjoy the experience.
+This a standalone app accessible in a browser. There are no additional installation instructions. 
 
-Run the following command:
+## Usage instructions
+The app homepage is a diagram of core competencies for the default Sitecore product, Sitecore AI. The user sees these sized base on their relative prevalance/emphasis across documentation and community data (forums, blogs, etc). 
+[Homepage](docs/images/1%20-%20app%20homepage.png)
 
-```sh
-npx create-turbo@latest
-```
+Here, the user can:
+- select a different product to explore using a dropdown as shown here
+[Product Selection](docs/images/2%20-%20product%20selection.png)
 
-## What's inside?
+- select a topic by clicking it
+[Select topic](docs/images/3%20-%20hovering%20over%20and%20selecting%20a%20topic.png)
 
-This Turborepo includes the following packages/apps:
+- viewing topic summary/related resources and optionally start testing knowledge with a quiz upon selection
+[Select topic](docs/images/4%20-%20selecting%20topic%20to%20view%20details.png)
 
-### Apps and Packages
+- take Agent generated quiz to test platform knowledge and recieve feedback on answers
+[Take quiz](docs/images/5%20-%20accessing%20quiz.png)
+[Quiz feedback](docs/images/6%20-%20quiz%20feedback.png)
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+- interact with Agent via chat for conversational platform support
+[Agent chat](docs/images/7%20-%20accessing%20chat%20experience.png)
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
-### Utilities
+## Comments
 
-This Turborepo has some additional tools already setup for you:
+Additional implementation details are available in the following README files:
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+[Web App README](/apps/web/README.md)
 
-### Build
+[App Agent Service README](/apps/df-agent-service/README.md)
 
-To build all apps and packages, run the following command:
+[Serialization Agent Service README](/apps/df-serializer-service/README.md)
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo build
-```
-
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
-```
-
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo build --filter=docs
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo dev
-```
-
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
-```
-
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo dev --filter=web
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-```
-
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo login
-```
-
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo link
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+[Project Documentation](/docs/Core%20Power%20Knowledge%20Explorer.pdf)
