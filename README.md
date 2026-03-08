@@ -1,4 +1,4 @@
-![Hackathon Logo](docs/images/hackathon.png?raw=true "Hackathon Logo")
+[Hackathon Logo](docs/images/hackathon.png?raw=true "Hackathon Logo")
 
 # Sitecore Hackathon 2026
 
@@ -18,30 +18,38 @@ Core Power is a streamlined, one-stop platform for Sitecore learning and develop
 
 
 ## Video link
-[DEMO Video](https://discord.com/channels/1479932665208770572/1479932665649168478/1479994866430771312)
+[DEMO Video](https://youtu.be/P8KvXNnx63E)
 
 ## Installation instructions
 
-Visit ![https://two026-core-power-delta-task-force-omega.onrender.com](https://two026-core-power-delta-task-force-omega.onrender.com) to enjoy the experience.
+Visit [https://two026-core-power-delta-task-force-omega.onrender.com](https://two026-core-power-delta-task-force-omega.onrender.com) to enjoy the experience.
 This a standalone app accessible in a browser. There are no additional installation instructions. 
 
 ## Usage instructions
 The app homepage is a diagram of core competencies for the default Sitecore product, Sitecore AI. The user sees these sized base on their relative prevalance/emphasis across documentation and community data (forums, blogs, etc). 
-![Homepage](docs/images/1%20-%20app%20homepage.png)
+[Homepage](docs/images/1%20-%20app%20homepage.png)
 
 Here, the user can:
 - select a different product to explore using a dropdown as shown here
-![Product Selection](docs/images/2%20-%20product%20selection.png)
+[Product Selection](docs/images/2%20-%20product%20selection.png)
 
 - select a topic by clicking it
-![Select topic](docs/images/2%20-%20product%20selection.png)
+[Select topic](docs/images/2%20-%20product%20selection.png)
 
 - viewing topic summary/related resources and optionally start testing knowledge with a quiz upon selection
-![Select topic](docs/images/4%20-%20selecting%20topic%20to%20view%20details.png)
+[Select topic](docs/images/4%20-%20selecting%20topic%20to%20view%20details.png)
 
 - take Agent generated quiz to test platform knowledge and recieve feedback on answers
-![Take q](docs/images/5%20-%20accessing%20quiz.png)
-![Quiz feedback](docs/images/6%20-%20quiz%20feedback.png)
+[Take q](docs/images/5%20-%20accessing%20quiz.png)
+[Quiz feedback](docs/images/6%20-%20quiz%20feedback.png)
 
 - interact with Agent via chat for conversational platform support
-![Agent chat](docs/images/7%20-%20accessing%20chat%20experience.png)
+[Agent chat](docs/images/7%20-%20accessing%20chat%20experience.png)
+
+
+## Comments
+
+Additional implementation details are available in the following README files:
+[Web App README](/apps/web/README.md)
+[App Agent Service README](/apps/df-agent-service/README.md)
+[Serialization Agent Service README](/apps/df-serializer-service/README.md)
